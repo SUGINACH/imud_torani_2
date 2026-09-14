@@ -22,6 +22,38 @@ function stripEditorialNotes(text) {
     return text.replace(/##[\s\S]*?##/g, '').replace(/[ \t]{2,}/g, ' ').replace(/\s+([,.:;!?])/g, '$1').trim();
 }
 
+/* מספור עמודים משותף - כדי ששער משנה (אם יוגדר להציג מספר) ישתמש
+   באותו פורמט/מסגרת/עמוד-התחלה בדיוק כמו עמודי תוכן רגילים */
+function formatPageNumberDisplay(pNum) {
+    const pageNumPos = document.getElementById('page-num-position')?.value || 'bottom_center';
+    const pageNumFormat = document.getElementById('page-num-format')?.value || 'gematria';
+    const pageNumFrame = document.getElementById('page-num-frame')?.value || 'none';
+    const startIdx = parseInt(document.getElementById('page-num-start-idx')?.value, 10) || 1;
+    // הערך שהעמוד הראשון-שנספר יתחיל ממנו (למשל 87, כדי לעבוד על חלק
+    // מאוחר בספר עם מספור שתואם את מיקומו בספר המוגמר) — נבדל מ-startIdx
+    // (שקובע מאיזה עמוד בכלל מתחילים לספור).
+    const initialValue = parseInt(document.getElementById('page-num-initial-value')?.value, 10) || 1;
+
+    let displayPageNum = '';
+    if (pageNumPos !== 'none' && pNum >= startIdx) {
+        const effectiveNum = pNum - startIdx + initialValue;
+        if (pageNumFormat === 'gematria') {
+            displayPageNum = toGematria(effectiveNum);
+        } else if (pageNumFormat === 'page_gematria') {
+            displayPageNum = 'דף ' + toGematria(effectiveNum);
+        } else if (pageNumFormat === 'numeric') {
+            displayPageNum = String(effectiveNum);
+        }
+    }
+
+    let framedPageNum = displayPageNum;
+    if (displayPageNum && pageNumFrame !== 'none') {
+        framedPageNum = `<span class="page-num-badge page-num-frame-${pageNumFrame}">${displayPageNum}</span>`;
+    }
+
+    return { displayPageNum, framedPageNum, pageNumPos };
+}
+
 function toGematria(num) {
     num = parseInt(num, 10);
     if (isNaN(num) || num <= 0)
@@ -92,6 +124,11 @@ function updateStyles() {
     root.style.setProperty('--fn-header-l', document.getElementById('f-hdr-l')?.value || 'serif');
     root.style.setProperty('--sz-header-l', (document.getElementById('s-hdr-l')?.value || 13) + 'pt');
 
+    // קו מפריד בין הכותרת העליונה לגוף הטקסט
+    const hdrDividerMode = document.getElementById('hdr-divider-style')?.value || 'gray';
+    const hdrDividerColorMap = { none: 'transparent', gray: 'rgba(0,0,0,0.06)', black: '#000' };
+    root.style.setProperty('--hdr-divider-color', hdrDividerColorMap[hdrDividerMode] || hdrDividerColorMap.gray);
+
     // כותרות 0 עד 7
     root.style.setProperty('--fn-h0', document.getElementById('f-h0')?.value || 'serif');
     root.style.setProperty('--sz-h0', (document.getElementById('s-h0')?.value || 26) + 'pt');
@@ -151,6 +188,13 @@ function updateStyles() {
     const sNoteTitle = document.getElementById('s-note-title')?.value;
     if (fNoteTitle) root.style.setProperty('--fn-note-title', fNoteTitle);
     if (sNoteTitle) root.style.setProperty('--sz-note-title', (sNoteTitle || 9) + 'pt');
+
+    // גופן וגודל טקסט ההערה עצמה, ויישור שורה אחרונה
+    const fNoteBody = document.getElementById('f-note-body')?.value;
+    const sNoteBody = document.getElementById('s-note-body')?.value;
+    if (fNoteBody) root.style.setProperty('--fn-note-body', fNoteBody);
+    if (sNoteBody) root.style.setProperty('--sz-note-body', sNoteBody + 'pt');
+    root.style.setProperty('--note-text-align-last', document.getElementById('note-text-align-last')?.value || 'right');
 }
 
 /* ============================================================
@@ -320,14 +364,23 @@ function createPageLayout(container, h2Text, h2TokenId, pNum, h1Title, h2Title, 
     let hdrCAlign = document.getElementById('hdr-c-align')?.value || 'center';
     let hdrLAlign = document.getElementById('hdr-l-align')?.value || 'left';
 
+    let hdrRFont = document.getElementById('f-hdr-r')?.value || "'Livorna','David Libre',serif";
+    let hdrRSize = (document.getElementById('s-hdr-r')?.value || 13) + 'pt';
+    let hdrLFont = document.getElementById('f-hdr-l')?.value || "'Livorna','David Libre',serif";
+    let hdrLSize = (document.getElementById('s-hdr-l')?.value || 13) + 'pt';
+
     let cR = customR, cL = customL;
 
     // היפוך תוכן (לא יישור) בעמודים זוגיים בעת הפעלת כותרות מתחלפות.
     // היישור נשאר צמוד לעמודה הפיזית ונפתר למטה דרך resolveHeaderAlign,
     // כך ש"חיצוני/פנימי" ממשיך להצביע על הקצה הנכון גם אחרי ההיפוך.
+    // הגופן/הגודל מתחלפים יחד עם התוכן - אחרת תוכן שעבר לעמודה השנייה
+    // ימשיך להיראות בגופן שהוגדר לעמודה המקורית שלו, לא לתוכן שבו.
     if (isAlternating && isEven) {
         const tempType = hdrRType; hdrRType = hdrLType; hdrLType = tempType;
         const tempCust = cR; cR = cL; cL = tempCust;
+        const tempFont = hdrRFont; hdrRFont = hdrLFont; hdrLFont = tempFont;
+        const tempSize = hdrRSize; hdrRSize = hdrLSize; hdrLSize = tempSize;
     }
 
     hdrRAlign = resolveHeaderAlign(hdrRAlign, 'r');
@@ -344,27 +397,7 @@ function createPageLayout(container, h2Text, h2TokenId, pNum, h1Title, h2Title, 
     const hdrLHTML = renderHeaderSectionHTML(hdrLType, cL, h1Title, h2Title, h3Title, bookTitle, '', contextExtra);
 
     // עיצוב מספור עמודים ומסגרות
-    const pageNumPos = document.getElementById('page-num-position')?.value || 'bottom_center';
-    const pageNumFormat = document.getElementById('page-num-format')?.value || 'gematria';
-    const pageNumFrame = document.getElementById('page-num-frame')?.value || 'none';
-    const startIdx = parseInt(document.getElementById('page-num-start-idx')?.value, 10) || 1;
-
-    let displayPageNum = '';
-    if (pageNumPos !== 'none' && pNum >= startIdx) {
-        const effectiveNum = pNum - startIdx + 1;
-        if (pageNumFormat === 'gematria') {
-            displayPageNum = toGematria(effectiveNum);
-        } else if (pageNumFormat === 'page_gematria') {
-            displayPageNum = 'דף ' + toGematria(effectiveNum);
-        } else if (pageNumFormat === 'numeric') {
-            displayPageNum = String(effectiveNum);
-        }
-    }
-
-    let framedPageNum = displayPageNum;
-    if (displayPageNum && pageNumFrame !== 'none') {
-        framedPageNum = `<span class="page-num-badge page-num-frame-${pageNumFrame}">${displayPageNum}</span>`;
-    }
+    const { displayPageNum, framedPageNum, pageNumPos } = formatPageNumberDisplay(pNum);
 
     const footerClass = (pageNumPos === 'bottom_outer') ? 'pos-outer' : 'pos-center';
     const showFooter = (pageNumPos === 'bottom_center' || pageNumPos === 'bottom_outer') && displayPageNum;
@@ -372,9 +405,9 @@ function createPageLayout(container, h2Text, h2TokenId, pNum, h1Title, h2Title, 
     page.innerHTML = `
     <div class="page-content-wrapper">
       <div class="top-header-grid">
-        <div class="header-col-r" style="text-align:${hdrRAlign}; justify-content:${hdrRAlign};">${hdrRHTML}</div>
+        <div class="header-col-r" style="text-align:${hdrRAlign}; justify-content:${hdrRAlign}; font-family:${hdrRFont}; font-size:${hdrRSize};">${hdrRHTML}</div>
         <div class="header-col-c" style="text-align:${hdrCAlign}; justify-content:${hdrCAlign};">${hdrCHTML}</div>
-        <div class="header-col-l" style="text-align:${hdrLAlign}; justify-content:${hdrLAlign};">${hdrLHTML}</div>
+        <div class="header-col-l" style="text-align:${hdrLAlign}; justify-content:${hdrLAlign}; font-family:${hdrLFont}; font-size:${hdrLSize};">${hdrLHTML}</div>
       </div>
       <div class="page-body-flow ${h2Text ? 'h2-flow-page' : ''}">
         ${h2Text ? `<div class="h2-spacer"></div><div class="title-level-2-standalone" ${h2TokenId !== undefined ? `data-token-id="${h2TokenId}" id="heading-tok-${h2TokenId}"` : ''}>${h2Text}</div>` : ''}
@@ -437,13 +470,30 @@ function parseMetadataFromText(rawText) {
    (יש להדביק חלק זה מיד בהמשך חלק א')
    ========================================================================== */
 
-function estimateSectionFillRatio(tokens) {
+function estimateSectionFillRatio(tokens, headingModes) {
     const sampleFlow = document.querySelector('.page-body-flow');
     const perPageCapacity = (sampleFlow ? sampleFlow.clientHeight : 900) * 2;
+
+    const existingRCol = document.querySelector('.right-col');
+    const colWidth = (existingRCol && existingRCol.offsetWidth) || 272;
+    const existingBlock = document.querySelector('.block-2col');
+    const spanWidth = (existingBlock && existingBlock.offsetWidth) || (colWidth * 2 + 20);
+
+    const styleObj = {
+        fontFamily: getComputedStyle(document.documentElement).getPropertyValue('--fn-body'),
+        fontSize: getComputedStyle(document.documentElement).getPropertyValue('--sz-body'),
+        lineHeight: '1.34'
+    };
+
     const probe = document.createElement('div');
-    probe.style.cssText = 'position:absolute;visibility:hidden;width:580px;';
-    probe.className = 'page-body-flow';
+    probe.className = 'main-column';
+    probe.style.cssText = `position:absolute; visibility:hidden; top:-9999px; width:${colWidth}px; font-family:${styleObj.fontFamily}; font-size:${styleObj.fontSize}; line-height:${styleObj.lineHeight};`;
     document.body.appendChild(probe);
+
+    const spanProbe = document.createElement('div');
+    spanProbe.style.cssText = `position:absolute; visibility:hidden; top:-9999px; width:${spanWidth}px;`;
+    document.body.appendChild(spanProbe);
+
     let totalHeight = 0;
     tokens.forEach(t => {
         if (t.type === 'p') {
@@ -453,17 +503,22 @@ function estimateSectionFillRatio(tokens) {
             totalHeight += p.getBoundingClientRect().height;
             probe.removeChild(p);
         } else if (t.type.startsWith('h')) {
+            const mode = headingModes ? headingModes[t.level] : 'inline_2col';
+            const hostProbe = mode === 'span_1col' ? spanProbe : probe;
             const h = document.createElement('div');
             h.className = t.customStyleId ? 'title-level-custom' : `title-level-${t.level}`;
             h.textContent = t.text;
-            probe.appendChild(h);
-            totalHeight += h.getBoundingClientRect().height;
+            hostProbe.appendChild(h);
+            let hHeight = h.getBoundingClientRect().height;
             const hStyle = window.getComputedStyle(h);
-            totalHeight += parseFloat(hStyle.marginTop) + parseFloat(hStyle.marginBottom);
-            probe.removeChild(h);
+            hHeight += parseFloat(hStyle.marginTop) + parseFloat(hStyle.marginBottom);
+            hostProbe.removeChild(h);
+            totalHeight += (mode === 'span_1col') ? hHeight * 2 : hHeight;
         }
     });
     document.body.removeChild(probe);
+    document.body.removeChild(spanProbe);
+
     if (totalHeight <= 0) return 1;
     const naivePages = Math.ceil(totalHeight / perPageCapacity);
     if (naivePages <= 1) return 1;
@@ -564,18 +619,13 @@ function balanceColumns(block, colWidth, styleObj, snapshot, availableHeight = I
         return item;
     });
 
-    const avoidOrphans = document.getElementById('avoid-orphans')?.checked ?? true;
-    const avoidWidows = document.getElementById('avoid-widows')?.checked ?? true;
-
+    // ייצור כל נקודות הפיצול האפשריות ברמת השורה
     const splitPoints = [];
     for (let i = 0; i <= items.length; i++) {
         if (i < items.length && items[i].type === 'p') {
             let lines = items[i].lines;
             splitPoints.push({ itemIndex: i, lineIndex: 0 });
             for (let l = 1; l < lines.length; l++) {
-                // בדיקת מניעת יתומות (Widows) ואלמנות (Orphans) בעת חלוקה
-                if (avoidWidows && l === 1) continue; // לא להשאיר שורה 1 בסוף הטור הימני
-                if (avoidOrphans && (lines.length - l) === 1) continue; // לא להעביר רק שורה 1 לראש הטור השמאלי
                 splitPoints.push({ itemIndex: i, lineIndex: l, lines: lines });
             }
         } else {
@@ -583,7 +633,10 @@ function balanceColumns(block, colWidth, styleObj, snapshot, availableHeight = I
         }
     }
 
-    // מניעת חיתוך בתוך טווח הערה (delimiter)
+    // מניעת שבירה מיד לאחר כותרת (שלא תישאר כותרת בודדת בסוף טור ימין), וכן
+    // מניעת חיתוך שורה בדיוק בתוך טווח מסומן-delimiter (הערת-שוליים/סיום) —
+    // אחרת הפתיח והסיום של אותה הערה ייפלו לשני צדי החלוקה, אף חצי לא
+    // ייסגר כראוי, וההערה תיעלם בשקט בלי סימון.
     const validSplitPoints = splitPoints.filter(sp => {
         if (sp.lineIndex > 0) {
             const item = items[sp.itemIndex];
@@ -615,6 +668,7 @@ function balanceColumns(block, colWidth, styleObj, snapshot, availableHeight = I
 
     let bestSplit = pointsToEvaluate[0];
     let minAbsDiff = Infinity;
+    let bestDiff = Infinity;
 
     for (let sp of pointsToEvaluate) {
         rCol.innerHTML = '';
@@ -625,6 +679,7 @@ function balanceColumns(block, colWidth, styleObj, snapshot, availableHeight = I
             pRight.className = 'p-cut';
             let rightText = sp.lines.slice(0, sp.lineIndex).join(' ');
             pRight.innerHTML = createDropWord(rightText, item.isCont, false, sp.lineIndex);
+            applyDelimiterStyles(pRight, 'body', getBodySizePt(), true); // תיקון: מדידה מדויקת
             rCol.appendChild(pRight);
         }
         let rHeight = rCol.scrollHeight;
@@ -636,18 +691,25 @@ function balanceColumns(block, colWidth, styleObj, snapshot, availableHeight = I
             pLeft.className = 'p-end';
             let leftText = sp.lines.slice(sp.lineIndex).join(' ');
             pLeft.innerHTML = createDropWord(leftText, true, false, item.lines.length - sp.lineIndex);
+            applyDelimiterStyles(pLeft, 'body', getBodySizePt(), true); // תיקון: מדידה מדויקת
             lCol.appendChild(pLeft);
         }
         for (let i = sp.lineIndex > 0 ? sp.itemIndex + 1 : sp.itemIndex; i < items.length; i++) {
             renderSingleItemFast(lCol, items[i]);
         }
         let lHeight = lCol.scrollHeight;
+
         let diff = rHeight - lHeight;
         let absDiff = Math.abs(diff);
 
-        if (absDiff < minAbsDiff || (absDiff === minAbsDiff && diff >= 0)) {
+        // בחירת הפיצול הקרוב ביותר לגובה שווה. במקרה שוויון: עדיפות לטור ימין (diff >= 0)
+        if (absDiff < minAbsDiff) {
             minAbsDiff = absDiff;
             bestSplit = sp;
+            bestDiff = diff;
+        } else if (absDiff === minAbsDiff && diff >= 0) {
+            bestSplit = sp;
+            bestDiff = diff;
         }
     }
 
@@ -722,13 +784,12 @@ function balanceColumns(block, colWidth, styleObj, snapshot, availableHeight = I
         appendItemFinal(lCol, lMargin, items[i], false, false, null, items[i].isCont);
     }
 
+    // יישור עדין של הבסיס התחתון (Justification)
     let finalDiff = rCol.scrollHeight - lCol.scrollHeight;
-    if (Math.max(rCol.scrollHeight, lCol.scrollHeight) <= availableHeight) {
-        if (finalDiff > 2 && finalDiff <= 60) {
-            justifyColumnVertically(lCol, rCol.scrollHeight, styleObj);
-        } else if (finalDiff < -2 && Math.abs(finalDiff) <= 60) {
-            justifyColumnVertically(rCol, lCol.scrollHeight, styleObj);
-        }
+    if (finalDiff > 2 && finalDiff <= 60) {
+        justifyColumnVertically(lCol, rCol.scrollHeight, styleObj);
+    } else if (finalDiff < -2 && Math.abs(finalDiff) <= 60) {
+        justifyColumnVertically(rCol, lCol.scrollHeight, styleObj);
     }
 
     finalizeNotePositions(finalNotes, Math.max(rCol.scrollHeight, lCol.scrollHeight));
@@ -833,6 +894,39 @@ function findDelimiterMatches(text, hostContextKey) {
     return dedup;
 }
 
+// בודקת אם בטקסט יש פתיחת delimiter (למשל "[") שאין לה סגירה מתאימה
+// בהמשך אותו טקסט — כלומר הערת-שוליים/סיום שנפתחה אבל טרם נסגרה. משמש
+// בזמן טוקניזציה כדי לדעת אם צריך לצרף את השורה הבאה לפני שהשורה הזו
+// הופכת לטוקן סופי.
+function hasUnclosedDelimiter(text, hostContextKey) {
+    const activeStyles = [];
+    const fnOpen = document.getElementById('fn-delim-open')?.value?.trim();
+    const fnClose = document.getElementById('fn-delim-close')?.value?.trim();
+    if (fnOpen && fnClose) {
+        activeStyles.push({ def: { trigger: { type: 'delimiterPair', open: fnOpen, close: fnClose } } });
+    }
+    if (typeof importedTextStyles !== 'undefined') {
+        importedTextStyles.forEach(inst => {
+            const trig = inst.def && inst.def.trigger;
+            if (!trig || trig.type !== 'delimiterPair' || !trig.open || !trig.close) return;
+            const scope = trig.appliesWithin;
+            if (scope && scope.textStyles && scope.textStyles.length && scope.textStyles.indexOf(hostContextKey) === -1) return;
+            activeStyles.push(inst);
+        });
+    }
+    return activeStyles.some(inst => {
+        const trig = inst.def.trigger;
+        let searchFrom = 0;
+        while (true) {
+            const oIdx = text.indexOf(trig.open, searchFrom);
+            if (oIdx === -1) return false;
+            const cIdx = text.indexOf(trig.close, oIdx + trig.open.length);
+            if (cIdx === -1) return true;
+            searchFrom = cIdx + trig.close.length;
+        }
+    });
+}
+
 function applyDelimiterStyles(containerEl, hostContextKey, hostSizePt, isDryRun = false) {
     const effHostSize = hostSizePt || 12;
     const walker = document.createTreeWalker(containerEl, NodeFilter.SHOW_TEXT, null, false);
@@ -848,7 +942,13 @@ function applyDelimiterStyles(containerEl, hostContextKey, hostSizePt, isDryRun 
         const frag = document.createDocumentFragment();
         let cursor = 0;
         dedup.forEach(m => {
-            if (m.start > cursor) frag.appendChild(document.createTextNode(text.slice(cursor, m.start)));
+            if (m.start > cursor) {
+                let textBefore = text.slice(cursor, m.start);
+                if (m.inst.def.target === 'footnote' || m.inst.def.target === 'endnote') {
+                    textBefore = textBefore.replace(/\s+$/, '');
+                }
+                frag.appendChild(document.createTextNode(textBefore));
+            }
             if (m.inst.def.target === 'footnote' || m.inst.def.target === 'endnote') {
                 const openLen = m.inst.def.trigger.open.length;
                 const closeLen = m.inst.def.trigger.close.length;
@@ -1236,10 +1336,12 @@ function renderPaginatedTOC(container, entries, titleText, bookTitle, h1Title, p
     while (currentEntryIdx < entries.length) {
         const isFirstTOCPage = (pagesCount === 0);
         pagesCount++;
+        const tocPNum = pageIndex + pagesCount - 1;
+        const { framedPageNum: tocFramedNum } = formatPageNumberDisplay(tocPNum);
 
         const page = document.createElement('div');
         page.className = 'a4-page toc-page';
-        page.setAttribute('data-page-index', String(pageIndex + pagesCount - 1));
+        page.setAttribute('data-page-index', String(tocPNum));
         applyContentBg(page, isFirstTOCPage ? 'tocFirst' : 'tocRegular');
         lastRenderedPage = page;
 
@@ -1254,7 +1356,8 @@ function renderPaginatedTOC(container, entries, titleText, bookTitle, h1Title, p
           ${isFirstTOCPage ? `<div class="h2-spacer"></div><div class="title-level-2-standalone" style="margin-top: 0; margin-bottom: 25px;">${titleText}</div>` : ''}
           <div class="toc-grid-full"></div>
         </div>
-        <div class="page-number-footer">${toGematria(pageIndex + pagesCount - 1)}</div>
+        <div class="page-number-footer">${tocFramedNum}</div>
+
       </div>
     `;
         container.appendChild(page);
@@ -1352,7 +1455,12 @@ function typesetDocument() {
 
     rawText = stripEditorialNotes(rawText);
     rawText = parseMetadataFromText(rawText);
-
+    // ביטול רווחים לפני סוגר פותח של הערה כדי להדביק אותה למילה שלפניה (מונע שבירת שורה ויתמות)
+    const fnOpen = document.getElementById('fn-delim-open')?.value?.trim() || '[';
+    if (fnOpen) {
+        const escO = fnOpen.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+        rawText = rawText.replace(new RegExp('\\s+(' + escO + ')', 'g'), '$1');
+    }
     const autoSimanH2 = document.getElementById('h2-auto-siman')?.checked ?? false;
     const resetSimanOnH1 = document.getElementById('h2-reset-siman')?.checked ?? true;
     let simanCounter = 0;
@@ -1381,15 +1489,29 @@ function typesetDocument() {
     lineToTokenMap = [];
 
     for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
-        const line = lines[lineIdx].trim();
+        let line = lines[lineIdx].trim();
         if (!line) {
             lineToTokenMap[lineIdx] = null;
             continue;
         }
 
+        // הערת-שוליים/סיום עשויה להיפתח בשורה אחת ולהיסגר רק בשורה מאוחרת
+        // יותר — מאחדים שורות רצופות עד שכל delimiter פתוח נסגר. עוצרים
+        // בשורה ריקה גם אם עדיין לא נסגר, כדי שסוגר ] ששכחו לא יבלע את כל
+        // המשך המסמך.
+        const mergedIndices = [lineIdx];
+        while (hasUnclosedDelimiter(line, 'body') && lineIdx + 1 < lines.length) {
+            const nextRaw = lines[lineIdx + 1].trim();
+            if (!nextRaw) break;
+            lineIdx++;
+            line += ' ' + nextRaw;
+            mergedIndices.push(lineIdx);
+        }
+        const mapMerged = (tokenId) => mergedIndices.forEach(idx => { lineToTokenMap[idx] = tokenId; });
+
         if (enLinePrefix && line.startsWith(enLinePrefix)) {
             pendingEndNote = line.slice(enLinePrefix.length).replace(/^[:\-–—]\s*/, '').trim();
-            lineToTokenMap[lineIdx] = null;
+            mapMerged(null);
             continue;
         }
 
@@ -1400,12 +1522,12 @@ function typesetDocument() {
             if (lvl === 7) {
                 pendingSideNote = txt;
                 pendingSideNoteStyleId = null;
-                lineToTokenMap[lineIdx] = null;
+                mapMerged(null);
             } else {
                 const hMode = document.getElementById('mode-h' + lvl)?.value;
                 if (hMode === 'run_in') {
                     pendingRunInHeading = { level: lvl, text: txt, lineIdx: lineIdx };
-                    lineToTokenMap[lineIdx] = null;
+                    mapMerged(null);
                 } else {
                     const tokenObj = {
                         id: tokens.length,
@@ -1415,7 +1537,7 @@ function typesetDocument() {
                         lineIdx: lineIdx
                     };
                     tokens.push(tokenObj);
-                    lineToTokenMap[lineIdx] = tokenObj.id;
+                    mapMerged(tokenObj.id);
                 }
             }
         } else {
@@ -1435,11 +1557,11 @@ function typesetDocument() {
             if (customMatch) {
                 if (customMatch.inst.def.target === 'endnote') {
                     pendingEndNote = customMatch.text;
-                    lineToTokenMap[lineIdx] = null;
+                    mapMerged(null);
                 } else if (customMatch.inst.def.layoutMode === 'side_note') {
                     pendingSideNote = customMatch.text;
                     pendingSideNoteStyleId = customMatch.inst.instanceId;
-                    lineToTokenMap[lineIdx] = null;
+                    mapMerged(null);
                 } else if (customMatch.inst.def.layoutMode === 'run_in') {
                     pendingRunInHeading = {
                         level: customMatch.inst.syntheticLevel,
@@ -1447,7 +1569,7 @@ function typesetDocument() {
                         lineIdx: lineIdx,
                         customStyleId: customMatch.inst.instanceId
                     };
-                    lineToTokenMap[lineIdx] = null;
+                    mapMerged(null);
                 } else {
                     const lvl = customMatch.inst.syntheticLevel;
                     const tokenObj = {
@@ -1459,7 +1581,7 @@ function typesetDocument() {
                         customStyleId: customMatch.inst.instanceId
                     };
                     tokens.push(tokenObj);
-                    lineToTokenMap[lineIdx] = tokenObj.id;
+                    mapMerged(tokenObj.id);
                 }
             } else {
                 let paragraphText = line;
@@ -1478,7 +1600,7 @@ function typesetDocument() {
                     lineIdx: lineIdx
                 };
                 tokens.push(tokenObj);
-                lineToTokenMap[lineIdx] = tokenObj.id;
+                mapMerged(tokenObj.id);
                 pendingSideNote = null;
                 pendingSideNoteStyleId = null;
                 pendingEndNote = null;
@@ -1585,14 +1707,16 @@ function typesetDocument() {
 
     if (showMainShaar) {
         renderExtAnchor(container, 'beforeAll', rawText);
-        renderMainShaar(container, activeThemeId);
+        renderMainShaar(container, activeThemeId, pageIndex);
+        if (document.getElementById('main-shaar-count-numbering')?.checked) pageIndex++;
         renderExtAnchor(container, 'afterMainShaar', rawText);
     } else {
         renderExtAnchor(container, 'beforeAll', rawText);
     }
 
     if (showBackShaar) {
-        renderBackShaar(container, activeThemeId);
+        renderBackShaar(container, activeThemeId, pageIndex);
+        if (document.getElementById('back-shaar-count-numbering')?.checked) pageIndex++;
     }
 
     if (enableGeneralTOC) {
@@ -1639,13 +1763,16 @@ function typesetDocument() {
             resetNoteCounterIfNeeded('footnote', 'part');
 
             ensureOddPageStart(sec.token.level);
-            renderSubShaar(container, sec.token, activeThemeId);
+            renderSubShaar(container, sec.token, activeThemeId, pageIndex);
             const subShaarPage = container.lastElementChild;
             if (subShaarPage) {
                 subShaarPage.setAttribute('data-page-index', String(pageIndex));
                 subShaarPage.setAttribute('data-first-line-idx', String(sec.token.lineIdx));
             }
             recordPageBreak(pageIndex, sec.token.lineIdx);
+            if (document.getElementById('sub-shaar-count-numbering')?.checked) {
+                pageIndex++;
+            }
 
             currentH1Title = sec.token.text.split(/[-–—]/)[0].trim();
             headingPageMap[sec.token.id] = toGematria(pageIndex);
@@ -1702,6 +1829,8 @@ function typesetDocument() {
         let secTokens = sec.tokens.slice();
         let tokenIndex = 0;
         let pendingWordTokens = null;
+        const sectionFillRatio = (document.getElementById('balance-chapter-end')?.value === 'yes')
+            ? estimateSectionFillRatio(secTokens, headingModes) : 1;
 
         while (tokenIndex < secTokens.length || pendingWordTokens) {
             if (prevPageEl) flushFootnotesInto(prevPageEl);
@@ -1724,12 +1853,12 @@ function typesetDocument() {
                 recordPageBreak(pageIndex - 1, firstLineIdxOnPage);
             }
 
-            let totalFlowH = pageLayout.bodyFlow.clientHeight || 870;
+            let totalFlowH = (pageLayout.bodyFlow.clientHeight || 870) * sectionFillRatio;
             let used = 0;
 
             if (isFirstPage && h2Text) {
                 const spacer = pageLayout.bodyFlow.querySelector('.h2-spacer');
-                const title = pageLayout.bodyFlow.querySelector('.title-level-2-standalone');
+                let title = pageLayout.bodyFlow.querySelector('.title-level-2-standalone');
                 if (title) {
                     if (sec.hToken.customStyleId) {
                         const inst = findExtTextStyle(sec.hToken.customStyleId);
@@ -1749,6 +1878,33 @@ function typesetDocument() {
                     // טיפול בתחולת עיטורי כותרת 2 (על שניהם / רק סימן / רק כותרת)
                     const topOrnHTML = (h2OrnTopStyle && h2OrnTopStyle !== 'none') ? getHeadingOrnamentHTML(h2OrnTopStyle, true, true) : '';
                     const btmOrnHTML = (h2OrnBtmStyle && h2OrnBtmStyle !== 'none') ? getHeadingOrnamentHTML(h2OrnBtmStyle, false, true) : '';
+
+                    // עיטורי צד (ימין/שמאל) חלים תמיד רק על טקסט הכותרת עצמה, לא
+                    // על שורת הסימן — עוטפים את title בשורת flex, ומחליפים את
+                    // המשתנה עצמו כך שכל ההפניות ל-title בענפי ה-scope למטה
+                    // (שלא משתנים) ימשיכו לפעול על המיקום הנכון ב-DOM.
+                    const h2OrnSideR = document.getElementById('h2-ornament-side-r')?.value;
+                    const h2OrnSideL = document.getElementById('h2-ornament-side-l')?.value;
+                    if ((h2OrnSideR && h2OrnSideR !== 'none') || (h2OrnSideL && h2OrnSideL !== 'none')) {
+                        const sideRow = document.createElement('div');
+                        sideRow.className = 'h2-title-side-row';
+                        sideRow.style.cssText = 'display:flex; flex-direction:row; align-items:center; justify-content:center; gap:8px; width:100%;';
+                        title.parentNode.insertBefore(sideRow, title);
+                        if (h2OrnSideR && h2OrnSideR !== 'none' && ORNAMENTS_LR[h2OrnSideR]) {
+                            const rWrap = document.createElement('span');
+                            rWrap.className = 'h3-ornament-right';
+                            rWrap.innerHTML = ORNAMENTS_LR[h2OrnSideR].svg;
+                            sideRow.appendChild(rWrap);
+                        }
+                        sideRow.appendChild(title);
+                        if (h2OrnSideL && h2OrnSideL !== 'none' && ORNAMENTS_LR[h2OrnSideL]) {
+                            const lWrap = document.createElement('span');
+                            lWrap.className = 'h3-ornament-left';
+                            lWrap.innerHTML = ORNAMENTS_LR[h2OrnSideL].svg;
+                            sideRow.appendChild(lWrap);
+                        }
+                        title = sideRow;
+                    }
 
                     if (h2OrnScope === 'both' || !simanElem) {
                         if (topOrnHTML) {
@@ -2168,10 +2324,13 @@ function typesetDocument() {
                     break;
                 }
 
+                // חישוב הגובה המותר האמיתי לשני הטורים (לאחר שכל הערות העמוד ידועות!)
+                const actualAvailH = remPageHeight - getFootnotesReservedHeight();
+
+                // 1. סיום פרק
                 if (tokenIndex >= secTokens.length && !pendingWordTokens) {
-                    if (document.getElementById('balance-chapter-end')?.value === 'yes') {
-                        balanceColumns(block2Col, colWidth, styleObj, blockNoteSnapshot, remPageHeight);
-                    }
+                    balanceColumns(block2Col, colWidth, styleObj, blockNoteSnapshot, actualAvailH);
+
                     const divHTML = getSectionDividerHTML(secDivStyle);
                     if (divHTML) {
                         const divContainer = document.createElement('div');
@@ -2182,11 +2341,17 @@ function typesetDocument() {
                 } else {
                     let nextPeekTok = pendingWordTokens ? pendingWordTokens.token : secTokens[tokenIndex];
                     const nextPeekMode = nextPeekTok && nextPeekTok.type.startsWith('h') ? headingModes[nextPeekTok.level] : 'inline_2col';
+
+                    // 2. לפני כותרת 3 רוחבית
                     if (nextPeekMode === 'span_1col' && !pendingWordTokens) {
-                        if (document.getElementById('balance-chapter-end')?.value === 'yes') {
-                            balanceColumns(block2Col, colWidth, styleObj, blockNoteSnapshot, remPageHeight);
-                        }
-                    } else {
+                        balanceColumns(block2Col, colWidth, styleObj, blockNoteSnapshot, actualAvailH);
+                    } 
+                    // 3. הטור הימני גלש לתוך שטח ההערה (כי ההערה הייתה בטור שמאל) או שיש פער משמעותי
+                    else if (rCol.scrollHeight > actualAvailH || Math.abs(rCol.scrollHeight - lCol.scrollHeight) > 60) {
+                        balanceColumns(block2Col, colWidth, styleObj, blockNoteSnapshot, actualAvailH);
+                    } 
+                    // 4. עמוד רגיל מאוזן שדורש רק יישור שורות עדין
+                    else {
                         let usedBlockH = Math.max(rCol.scrollHeight, lCol.scrollHeight);
                         let finalDiff = rCol.scrollHeight - lCol.scrollHeight;
                         if (usedBlockH <= remPageHeight) {
