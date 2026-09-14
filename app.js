@@ -305,29 +305,6 @@ if (window.ResizeObserver && document.getElementById('preview-pane')) {
 }
 
 /* ============================================================
-   התאמת רוחב עיטור כותרת 2 לרוחב הטקסט שלצידו (סימן/כותרת)
-   הערה: אי אפשר להשיג את זה ב-CSS טהור (width:fit-content בעטיפה
-   + width:100% בפנים הן דרישות סותרות/מעגליות שהדפדפן לא יכול
-   לפתור, ובפועל היו "מתבטלות" זו את זו וחוזרות לגודל הטבעי של ה-SVG).
-   לכן מודדים בפועל את רוחב הטקסט הצמוד לעיטור (זה שלצידו הוא הוכנס
-   ב-typesetDocument), וקובעים את רוחב העיטור לפי המדידה הזו.
-   ============================================================ */
-function applyHeadingOrnamentTextFit() {
-    document.querySelectorAll('.h2-ornament-top, .h2-ornament-bottom').forEach(ornWrap => {
-        const fitInner = ornWrap.querySelector('.heading-ornament-wrap.fit-heading-text');
-        if (!fitInner) return;
-        const isTop = ornWrap.classList.contains('h2-ornament-top');
-        const targetEl = isTop ? ornWrap.nextElementSibling : ornWrap.previousElementSibling;
-        if (!targetEl) return;
-        const textWidth = targetEl.getBoundingClientRect().width;
-        if (textWidth > 0) {
-            fitInner.style.width = textWidth + 'px';
-            fitInner.style.maxWidth = '90%';
-        }
-    });
-}
-
-/* ============================================================
    ניהול ערכות נושא מותאמות אישית
    ============================================================ */
 let customThemes = [];
@@ -804,8 +781,52 @@ function rehydrateExtImports() {
    ========================================================================== */
 
 /* ==========================================================================
+   מאגר גופנים מובנה להזנה ראשונית לכל בוררי הגופנים
+   ========================================================================== */
+const BUILTIN_DEFAULT_FONTS = [
+    { value: "'David Libre', serif", label: "דוד ליברה (David Libre)" },
+    { value: "'Frank Ruhl Libre', serif", label: "פרנק-ריהל (Frank Ruhl)" },
+    { value: "'Noto Serif Hebrew', serif", label: "נוטו סריף (Noto Serif Hebrew)" },
+    { value: "'Bellefair', serif", label: "בלפייר (Bellefair)" },
+    { value: "'Guttman Rashi', 'Frank Ruhl Libre', serif", label: "כתב רש\"י (Rashi)" },
+    { value: "'Assistant', sans-serif", label: "אסיסטנט (Assistant)" },
+    { value: "'Rubik', sans-serif", label: "רוביק (Rubik)" }
+];
+
+function initDefaultFonts() {
+    document.querySelectorAll('.font-picker').forEach(select => {
+        if (select.querySelector('optgroup[label="גופני רשת מובנים"]')) return;
+        const currentVal = select.value;
+        const grp = document.createElement('optgroup');
+        grp.label = 'גופני רשת מובנים';
+        BUILTIN_DEFAULT_FONTS.forEach(f => {
+            const opt = document.createElement('option');
+            opt.value = f.value;
+            opt.textContent = f.label;
+            grp.appendChild(opt);
+        });
+        select.prepend(grp);
+
+        const id = select.id;
+        if (currentVal) {
+            select.value = currentVal;
+        } else if (id === 'font-body') {
+            select.value = "'Frank Ruhl Libre', serif";
+        } else if (id === 'font-first-word' || id === 'f-sh-title' || id === 'f-h1') {
+            select.value = "'Bellefair', serif";
+        } else if (id.startsWith('f-h3') || id.startsWith('f-gtoc-3')) {
+            select.value = "'Noto Serif Hebrew', serif";
+        } else {
+            select.value = "'David Libre', serif";
+        }
+    });
+}
+
+/* ==========================================================================
    טעינה דינמית של קובצי JSON חיצוניים ואיחוד ערכות לפי מספר
    ========================================================================== */
+const jsonShaarSets = {}; // לאיחוד שערים לפי מספר ערכה
+
 async function loadExternalJSONAssets() {
     const assetsToLoad = [
         { file: 'shaar_main.json', type: 'shaar_main' },
@@ -818,8 +839,6 @@ async function loadExternalJSONAssets() {
         { file: 'ornaments_up_down.json', type: 'ornaments_ud' }
     ];
 
-    const jsonShaarSets = {}; // לאיחוד שערים לפי מספר ערכה
-
     for (const asset of assetsToLoad) {
         try {
             const response = await fetch(asset.file);
@@ -828,52 +847,51 @@ async function loadExternalJSONAssets() {
             if (!Array.isArray(items)) continue;
 
             items.forEach(item => {
-                // זיהוי מספר הערכה (למשל "1 שער ראשי" או "shaar_1")
-                const numMatch = (item.name && item.name.match(/^(\d+)/)) || (item.id && item.id.match(/(\d+)/));
+                const numMatch = (item.name && item.name.match(/(\d+|[א-ת])/)) || (item.id && item.id.match(/(\d+)/));
                 const setNum = numMatch ? numMatch[1] : null;
+                const rawSvg = item.svg || item.svgContent || item.content || item.svgData || item.data || '';
 
                 if (asset.type === 'shaar_main') {
-                    registerExternalShaar('main', item.id, item.name, item.svg);
+                    registerExternalShaar('main', item.id, item.name, rawSvg);
                     appendOptionToSelect('select-shaar-main', item.id, item.name, 'שערים ראשיים מ-JSON', 'shaar-main-json-optgroup');
                     if (setNum) {
                         if (!jsonShaarSets[setNum]) jsonShaarSets[setNum] = {};
-                        jsonShaarSets[setNum].main = item;
+                        jsonShaarSets[setNum].main = { ...item, svg: rawSvg };
                     }
                 } else if (asset.type === 'shaar_sub') {
-                    registerExternalShaar('sub', item.id, item.name, item.svg);
+                    registerExternalShaar('sub', item.id, item.name, rawSvg);
                     appendOptionToSelect('select-shaar-sub', item.id, item.name, 'שערי משנה מ-JSON', 'shaar-sub-json-optgroup');
                     if (setNum) {
                         if (!jsonShaarSets[setNum]) jsonShaarSets[setNum] = {};
-                        jsonShaarSets[setNum].sub = item;
+                        jsonShaarSets[setNum].sub = { ...item, svg: rawSvg };
                     }
                 } else if (asset.type === 'shaar_back') {
-                    registerExternalShaar('back', item.id, item.name, item.svg);
+                    registerExternalShaar('back', item.id, item.name, rawSvg);
                     appendOptionToSelect('select-shaar-back', item.id, item.name, 'שערים אחוריים מ-JSON', 'shaar-back-json-optgroup');
                     if (setNum) {
                         if (!jsonShaarSets[setNum]) jsonShaarSets[setNum] = {};
-                        jsonShaarSets[setNum].back = item;
+                        jsonShaarSets[setNum].back = { ...item, svg: rawSvg };
                     }
                 } else if (asset.type === 'header') {
-                    registerExternalHeader(item.id, item.svg);
+                    registerExternalHeader(item.id, rawSvg);
                     appendOptionToSelect('hdr-c-type', item.id, item.name, 'עיטורי כותרת מ-JSON', 'hdr-c-json-optgroup');
                     appendOptionToSelect('hdr-r-type', item.id, item.name, 'עיטורי כותרת מ-JSON', 'hdr-r-json-optgroup');
                     appendOptionToSelect('hdr-l-type', item.id, item.name, 'עיטורי כותרת מ-JSON', 'hdr-l-json-optgroup');
                 } else if (asset.type === 'divider') {
-                    registerExternalDivider(item.id, item.svg);
+                    registerExternalDivider(item.id, rawSvg);
                     appendOptionToSelect('section-divider-style', item.id, item.name, 'עיטורי סיום מ-JSON', 'sec-div-json-optgroup');
                 } else if (asset.type === 'note_rule') {
-                    registerExternalNoteRule(item.id, item.svg);
+                    registerExternalNoteRule(item.id, rawSvg);
                     appendOptionToSelect('note-rule-style', item.id, item.name, 'מפרידים מ-JSON', 'note-rules-json-optgroup');
                 } else if (asset.type === 'ornaments_lr') {
-                    registerOrnamentsLR(item.id, item.name, item.svg);
+                    registerOrnamentsLR(item.id, item.name, rawSvg);
                     appendOptionToSelect('h3-ornament-set', item.id, item.name, 'סטים שלמים מ-JSON', 'h3-set-json-optgroup');
                     appendOptionToSelect('h3-ornament-r', item.id, item.name, 'עיטורי ימין מ-JSON', 'h3-r-json-optgroup');
                     appendOptionToSelect('h3-ornament-l', item.id, item.name, 'עיטורי שמאל מ-JSON', 'h3-l-json-optgroup');
-                    // עיטורי צד לכותרת הערות שוליים
                     appendOptionToSelect('note-header-orn-r', item.id, item.name, 'מתוך ornaments_left_right.json', 'note-orn-r-json');
                     appendOptionToSelect('note-header-orn-l', item.id, item.name, 'מתוך ornaments_left_right.json', 'note-orn-l-json');
                 } else if (asset.type === 'ornaments_ud') {
-                    registerOrnamentsUD(item.id, item.name, item.svg);
+                    registerOrnamentsUD(item.id, item.name, rawSvg);
                     appendOptionToSelect('h2-ornament-set', item.id, item.name, 'סטים שלמים מ-JSON', 'h2-set-json-optgroup');
                     appendOptionToSelect('h2-ornament-top-style', item.id, item.name, 'עיטורים עליונים מ-JSON', 'h2-top-json-optgroup');
                     appendOptionToSelect('h2-ornament-bottom-style', item.id, item.name, 'עיטורים תחתונים מ-JSON', 'h2-btm-json-optgroup');
@@ -882,8 +900,10 @@ async function loadExternalJSONAssets() {
         } catch (e) {}
     }
 
-    // איחוד שערי JSON לפי מספר ערכה לרשימת active-theme-select
-    Object.keys(jsonShaarSets).sort((a, b) => parseInt(a, 10) - parseInt(b, 10)).forEach(num => {
+    Object.keys(jsonShaarSets).sort((a, b) => {
+        const na = parseInt(a, 10), nb = parseInt(b, 10);
+        return (!isNaN(na) && !isNaN(nb)) ? na - nb : a.localeCompare(b, 'he');
+    }).forEach(num => {
         const set = jsonShaarSets[num];
         const themeId = 'json_theme_' + num;
         const themeName = `ערכה ${num} (מ-JSON)`;
@@ -905,12 +925,30 @@ async function loadExternalJSONAssets() {
 }
 
 function syncThemeToIndividualShaars() {
+    const activeSel = document.getElementById('active-theme-select');
+    const activeVal = activeSel ? activeSel.value : '';
     const m = document.getElementById('select-shaar-main');
     const b = document.getElementById('select-shaar-back');
     const s = document.getElementById('select-shaar-sub');
-    if (m) m.value = 'theme_default';
-    if (b) b.value = 'theme_default';
-    if (s) s.value = 'theme_default';
+
+    if (activeVal.startsWith('json_theme_') && typeof jsonShaarSets !== 'undefined') {
+        const num = activeVal.replace('json_theme_', '');
+        const set = jsonShaarSets[num];
+        if (set) {
+            if (m && set.main) m.value = set.main.id;
+            if (s && set.sub) s.value = set.sub.id;
+            if (b && set.back) b.value = set.back.id;
+        }
+    } else if (activeVal.startsWith('builtin_')) {
+        if (m) m.value = activeVal;
+        if (s) s.value = activeVal;
+        if (b) b.value = activeVal;
+    } else {
+        if (m) m.value = 'theme_default';
+        if (b) b.value = 'theme_default';
+        if (s) s.value = 'theme_default';
+    }
+
     refreshVisualPicker('select-shaar-main');
     refreshVisualPicker('select-shaar-back');
     refreshVisualPicker('select-shaar-sub');
@@ -933,6 +971,27 @@ function appendOptionToSelect(selectId, value, text, groupLabel, optgroupId) {
     opt.value = value;
     opt.textContent = text;
     optgroup.appendChild(opt);
+}
+
+/* ============================================================
+   ניהול לחצני טוגל לכותרות עליונות (Mutual Exclusivity)
+   ============================================================ */
+function onHdrSplitTitleChange() {
+    const splitCb = document.getElementById('hdr-split-title');
+    const altCb = document.getElementById('hdr-alternating');
+    if (splitCb && splitCb.checked && altCb) {
+        altCb.checked = false;
+    }
+    typesetDocument();
+}
+
+function onHdrAlternatingChange() {
+    const splitCb = document.getElementById('hdr-split-title');
+    const altCb = document.getElementById('hdr-alternating');
+    if (altCb && altCb.checked && splitCb) {
+        splitCb.checked = false;
+    }
+    typesetDocument();
 }
 
 async function loadExternalFonts() {
@@ -1004,7 +1063,6 @@ function initShaarBoxResizer() {
             box,
             page,
             shaarType: box.getAttribute('data-shaar-type') || 'main',
-            shaarId: box.getAttribute('data-shaar-id') || '',
             isMove: !!dragBar,
             handleType: handle ? handle.getAttribute('data-handle') : null,
             startX: e.clientX,
@@ -1024,7 +1082,7 @@ function initShaarBoxResizer() {
         const dx_mm = ((e.clientX - activeDrag.startX) / activeDrag.pageW) * 210;
         const dy_mm = ((e.clientY - activeDrag.startY) / activeDrag.pageH) * 297;
 
-        let { initTop, initBottom, initRight, initLeft, isMove, handleType, box, shaarType, shaarId } = activeDrag;
+        let { initTop, initBottom, initRight, initLeft, isMove, handleType, box, shaarType } = activeDrag;
         let nTop = initTop, nBottom = initBottom, nRight = initRight, nLeft = initLeft;
 
         if (isMove) {
@@ -1052,15 +1110,6 @@ function initShaarBoxResizer() {
         if (bEl) bEl.value = Math.round(nBottom);
         if (rEl) rEl.value = Math.round(nRight);
         if (lEl) lEl.value = Math.round(nLeft);
-
-        // שמירת המיקום עבור השער הספציפי הזה בלבד (לא כדריסה גלובלית
-        // שתשפיע על כל שאר השערים)
-        if (shaarId && typeof shaarBoxSavedPositions !== 'undefined') {
-            if (!shaarBoxSavedPositions[shaarType]) shaarBoxSavedPositions[shaarType] = {};
-            shaarBoxSavedPositions[shaarType][shaarId] = {
-                top: nTop.toFixed(1), bottom: nBottom.toFixed(1), right: nRight.toFixed(1), left: nLeft.toFixed(1)
-            };
-        }
     });
 
     window.addEventListener('mouseup', () => {
@@ -1294,6 +1343,7 @@ document.addEventListener('click', (e) => {
    אירוע טעינת הדף הראשי (Window Onload)
    ============================================================ */
 window.onload = async function() {
+    initDefaultFonts();
     refreshCustomThemesUI();
     rehydrateExtImports();
 
@@ -1342,6 +1392,6 @@ window.onload = async function() {
 גוף הטקסט המכיל הערות צד בשולי הדף. הערות אלו ממוקמות בדיוק מול הפסקה אליה הן מתייחסות, ובכך מאפשרות ללומד לעיין במקורות תוך כדי לימודו הרציף בגוף הספר.`;
     }
 
-    typesetDocument();
+    typesetDocument(50);
     initVisualPickers();
 };
