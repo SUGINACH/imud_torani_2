@@ -1,0 +1,2282 @@
+[
+  {
+    "family": "Adama Bold",
+    "file": "Adama Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Adama",
+    "file": "Adama.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "AdamaLight",
+    "file": "AdamaLight.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "AdamaMF Bold",
+    "file": "AdamaMF Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Aharoni Bold",
+    "file": "Aharoni Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "AhavaBold",
+    "file": "AhavaBold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Alef Bold",
+    "file": "Alef Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Alef Regular",
+    "file": "Alef Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Alpha Bold",
+    "file": "Alpha Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Alpha",
+    "file": "Alpha.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "AlphaBlack",
+    "file": "AlphaBlack.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "AlphaLight",
+    "file": "AlphaLight.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Amatic SC Bold",
+    "file": "Amatic SC Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "AmaticaSC Regular",
+    "file": "AmaticaSC-Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Amit",
+    "file": "Amit.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "AncientHebrew",
+    "file": "AncientHebrew.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Arial Black",
+    "file": "Arial Black.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Arial Bold Italic",
+    "file": "Arial Bold Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Arial Bold",
+    "file": "Arial Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Arial Italic",
+    "file": "Arial Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Arial Narrow Bold Italic",
+    "file": "Arial Narrow Bold Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Arial Narrow Bold",
+    "file": "Arial Narrow Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Arial Narrow Italic",
+    "file": "Arial Narrow Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Arial Narrow",
+    "file": "Arial Narrow.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Arial",
+    "file": "Arial.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Ashkenazy",
+    "file": "Ashkenazy.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Assistant Bold",
+    "file": "Assistant Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Assistant ExtraBold",
+    "file": "Assistant-ExtraBold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Assistant ExtraLight",
+    "file": "Assistant-ExtraLight.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Assistant Light",
+    "file": "Assistant-Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Assistant Regular",
+    "file": "Assistant-Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Assistant SemiBold",
+    "file": "Assistant-SemiBold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "BA Franknatan Bold",
+    "file": "BA Franknatan Bold.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "BA Platforma Regular",
+    "file": "BA Platforma Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Baznat",
+    "file": "Baznat.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Bona Nova Bold",
+    "file": "Bona Nova Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Bona Nova Italic",
+    "file": "Bona Nova Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Bona Nova Regular",
+    "file": "Bona Nova Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Bookshelf Symbol 7",
+    "file": "Bookshelf Symbol 7.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Calibri Bold Italic",
+    "file": "Calibri Bold Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Calibri Bold",
+    "file": "Calibri Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Calibri Italic",
+    "file": "Calibri Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Calibri Light Italic",
+    "file": "Calibri Light Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Calibri Light",
+    "file": "Calibri Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Calibri",
+    "file": "Calibri.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Calligraphr Regular",
+    "file": "Calligraphr Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Comic Sans MS Bold Italic",
+    "file": "Comic Sans MS Bold Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Comic Sans MS Bold",
+    "file": "Comic Sans MS Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Comic Sans MS Italic",
+    "file": "Comic Sans MS Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Comic Sans MS",
+    "file": "Comic Sans MS.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Courier New Bold Italic",
+    "file": "Courier New Bold Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Courier New Bold",
+    "file": "Courier New Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Courier New Italic",
+    "file": "Courier New Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Courier New",
+    "file": "Courier New.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Dam Regular Regular",
+    "file": "Dam Regular Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Daniel",
+    "file": "Daniel.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "David Bold",
+    "file": "David Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "David Libre Bold",
+    "file": "David Libre Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "David",
+    "file": "David.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "DavidLibre Medium",
+    "file": "DavidLibre-Medium.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "DavidLibre Regular",
+    "file": "DavidLibre-Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Dorian CLM Book",
+    "file": "Dorian CLM Book.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Eco",
+    "file": "Eco.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Eliel Regular",
+    "file": "Eliel Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "FbFrankReal Bold",
+    "file": "FbFrankReal-Bold.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "FbFrankReal Light",
+    "file": "FbFrankReal-Light.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "FbFrankReal Regular",
+    "file": "FbFrankReal-Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "FbHadasaNew Regular",
+    "file": "FbHadasaNew-Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Frank Ruhl Libre Bold",
+    "file": "Frank Ruhl Libre Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "FrankReal Bold",
+    "file": "FrankReal Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "FrankRealMedium",
+    "file": "FrankRealMedium.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "FrankRuehl DP Bold",
+    "file": "FrankRuehl DP Bold.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "FrankRuehl DP",
+    "file": "FrankRuehl DP.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "FrankRuehl",
+    "file": "FrankRuehl.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "FrankRuhlLibre Black",
+    "file": "FrankRuhlLibre-Black.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "FrankRuhlLibre Light",
+    "file": "FrankRuhlLibre-Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "FrankRuhlLibre Medium",
+    "file": "FrankRuhlLibre-Medium.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "FrankRuhlLibre Regular",
+    "file": "FrankRuhlLibre-Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "FrankRuhlMF BoldA",
+    "file": "FrankRuhlMF-BoldA.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "FtPilKahol",
+    "file": "FtPilKahol.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Gisha Bold",
+    "file": "Gisha Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Gisha",
+    "file": "Gisha.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Gladia CLM Bold",
+    "file": "Gladia CLM Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Aharoni",
+    "file": "Guttman Aharoni.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman David Bold",
+    "file": "Guttman David Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman David Light",
+    "file": "Guttman David Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman David",
+    "file": "Guttman David.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Drogolin Bold",
+    "file": "Guttman Drogolin Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Drogolin",
+    "file": "Guttman Drogolin.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Frank",
+    "file": "Guttman Frank.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Frnew",
+    "file": "Guttman Frnew.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Haim Condensed",
+    "file": "Guttman Haim-Condensed.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Haim",
+    "file": "Guttman Haim.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Hatzvi Bold",
+    "file": "Guttman Hatzvi Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Hatzvi",
+    "file": "Guttman Hatzvi.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Kav Bold",
+    "file": "Guttman Kav Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Kav Light",
+    "file": "Guttman Kav-Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Kav",
+    "file": "Guttman Kav.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Logo1",
+    "file": "Guttman Logo1.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Mantova Bold",
+    "file": "Guttman Mantova Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Mantova Decor",
+    "file": "Guttman Mantova-Decor.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Mantova",
+    "file": "Guttman Mantova.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Miryam Bold",
+    "file": "Guttman Miryam Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Miryam Light",
+    "file": "Guttman Miryam Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Myamfix",
+    "file": "Guttman Myamfix.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Rashi Bold",
+    "file": "Guttman Rashi Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Rashi",
+    "file": "Guttman Rashi.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Stam",
+    "file": "Guttman Stam.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Vilna Bold",
+    "file": "Guttman Vilna Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Vilna",
+    "file": "Guttman Vilna.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Yad Brush",
+    "file": "Guttman Yad-Brush.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Yad Light",
+    "file": "Guttman Yad-Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Yad",
+    "file": "Guttman Yad.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Aharoni Bold",
+    "file": "Guttman-Aharoni Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman Aram",
+    "file": "Guttman-Aram.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Guttman CourMir",
+    "file": "Guttman-CourMir.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "HadasaNew Bold",
+    "file": "HadasaNew Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "HadasaNew",
+    "file": "HadasaNew.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "HadasaNewBlack",
+    "file": "HadasaNewBlack.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "HadasaNewLight",
+    "file": "HadasaNewLight.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Hadasl Light",
+    "file": "Hadasl Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Hadassah Friedlaender Bold",
+    "file": "Hadassah Friedlaender Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Hadassah Friedlaender",
+    "file": "Hadassah Friedlaender.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "HarSinai",
+    "file": "HarSinai.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Heebo Bold",
+    "file": "Heebo Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Heebo Black",
+    "file": "Heebo-Black.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Heebo ExtraBold",
+    "file": "Heebo-ExtraBold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Heebo Light",
+    "file": "Heebo-Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Heebo Medium",
+    "file": "Heebo-Medium.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Heebo Regular",
+    "file": "Heebo-Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Heebo Thin",
+    "file": "Heebo-Thin.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Hidekel",
+    "file": "Hidekel.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Hummus, Chips, Salat",
+    "file": "Hummus, Chips, Salat.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "It kashiyot Regular",
+    "file": "It kashiyot Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "It mankala",
+    "file": "It mankala.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "It Nishnushim Bold",
+    "file": "It Nishnushim Bold.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "It Nishnushim Italic",
+    "file": "It Nishnushim Italic.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "It Nishnushim Regular",
+    "file": "It Nishnushim Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Josef",
+    "file": "Josef.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Karantina Bold",
+    "file": "Karantina Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Karantina Light",
+    "file": "Karantina Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Karantina Regular",
+    "file": "Karantina Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Kimchi",
+    "file": "Kimchi.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Ktav Yad CLM Bold Italic",
+    "file": "Ktav Yad CLM Bold Italic.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Levenim MT Bold",
+    "file": "Levenim MT Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Levenim MT",
+    "file": "Levenim MT.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Anita Regular",
+    "file": "Lia Anita Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Balloon Regular",
+    "file": "Lia Balloon Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Banana Regular",
+    "file": "Lia Banana Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Berta Regular",
+    "file": "Lia Berta Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Diplomat ExtraLight",
+    "file": "Lia Diplomat ExtraLight.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Dudayim Regular",
+    "file": "Lia Dudayim Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Element Black",
+    "file": "Lia Element Black.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Element Medium",
+    "file": "Lia Element Medium.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Eliana Regular",
+    "file": "Lia Eliana Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Elis Regular",
+    "file": "Lia Elis Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia hahalilan Regular",
+    "file": "Lia hahalilan Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Julliet Dfus Regular",
+    "file": "Lia Julliet Dfus Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Kaha Itorarti Light",
+    "file": "Lia Kaha Itorarti Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Lira Israelit Regular",
+    "file": "Lia Lira Israelit Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Mandolina Regular",
+    "file": "Lia Mandolina Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Megila Regular",
+    "file": "Lia Megila Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Megillat haatzmaut Regular",
+    "file": "Lia Megillat haatzmaut Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Michal Kasov Regular",
+    "file": "Lia Michal-Kasov Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Midbar Regular",
+    "file": "Lia Midbar Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Mizrahy Regular",
+    "file": "Lia Mizrahy Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Mozart Regular",
+    "file": "Lia Mozart Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Optimist Bold",
+    "file": "Lia Optimist Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Reponzel Regular",
+    "file": "Lia Reponzel Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Romantica Regular",
+    "file": "Lia Romantica Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Seret Tzaov Regular",
+    "file": "Lia Seret Tzaov Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Sgula Regular",
+    "file": "Lia Sgula Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Shahar Hadar small",
+    "file": "Lia Shahar Hadar small.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Shaharit Regular",
+    "file": "Lia Shaharit Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Shokolad Regular",
+    "file": "Lia Shokolad Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Shoshan Regular",
+    "file": "Lia Shoshan Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Tehila Regular",
+    "file": "Lia Tehila Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Tiferet ExtraBold",
+    "file": "Lia Tiferet ExtraBold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Lia Yeffet Bold",
+    "file": "Lia Yeffet Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "LiaBatkol Regular 5",
+    "file": "LiaBatkol-Regular-5.woff2",
+    "format": "woff2"
+  },
+  {
+    "family": "LiaCarnaval Regular",
+    "file": "LiaCarnaval Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "LiaClassic Bold",
+    "file": "LiaClassic-Bold.woff2",
+    "format": "woff2"
+  },
+  {
+    "family": "LiaClassic Light",
+    "file": "LiaClassic-Light.woff2",
+    "format": "woff2"
+  },
+  {
+    "family": "LiaClassic Outline",
+    "file": "LiaClassic-Outline.woff2",
+    "format": "woff2"
+  },
+  {
+    "family": "LiaClassic Regular",
+    "file": "LiaClassic-Regular.woff2",
+    "format": "woff2"
+  },
+  {
+    "family": "LiaEspresso Light 3",
+    "file": "LiaEspresso-Light-3.woff2",
+    "format": "woff2"
+  },
+  {
+    "family": "LiaEspresso Thin 2",
+    "file": "LiaEspresso-Thin-2.woff2",
+    "format": "woff2"
+  },
+  {
+    "family": "LiaHalel Regular",
+    "file": "LiaHalel Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "LiaHinuma Regular",
+    "file": "LiaHinuma-Regular.woff2",
+    "format": "woff2"
+  },
+  {
+    "family": "LiaJulliet LiaJulliet Bold",
+    "file": "LiaJulliet LiaJulliet Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "LiaLovely Regular",
+    "file": "LiaLovely-Regular.woff2",
+    "format": "woff2"
+  },
+  {
+    "family": "LiaMia Regular",
+    "file": "LiaMia Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "LiaRozeta Bold",
+    "file": "LiaRozeta Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "LiaRuling Regular",
+    "file": "LiaRuling Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "LiaShalehet Regular",
+    "file": "LiaShalehet Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "LiaShamaim Regular",
+    "file": "LiaShamaim-Regular.woff2",
+    "format": "woff2"
+  },
+  {
+    "family": "LiaTetouan no tags",
+    "file": "LiaTetouan no tags.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "LiaYapani Regular",
+    "file": "LiaYapani Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Likritz Hebrew",
+    "file": "Likritz Hebrew.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Lilach",
+    "file": "Lilach.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Livorna Bold",
+    "file": "Livorna Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Livorna",
+    "file": "Livorna.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "LuiziRound FFC Regular",
+    "file": "LuiziRound FFC-Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Maarvon Regular",
+    "file": "Maarvon Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Marco Bold",
+    "file": "Marco Bold.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Marco Light",
+    "file": "Marco Light.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Marco",
+    "file": "Marco.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "MehirLoMumlatsExtraLight",
+    "file": "MehirLoMumlatsExtraLight.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "MehirLoMumlatsLight",
+    "file": "MehirLoMumlatsLight.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "MehirLoMumlatsReg",
+    "file": "MehirLoMumlatsReg.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "MehirMumlatsReg",
+    "file": "MehirMumlatsReg.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "MHadasa Bold",
+    "file": "MHadasa Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "MHadasa Normal",
+    "file": "MHadasa Normal.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Microsoft Sans Serif",
+    "file": "Microsoft Sans Serif.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Miri Medium",
+    "file": "Miri Medium.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Miriam Fixed",
+    "file": "Miriam Fixed.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Miriam Libre Bold",
+    "file": "Miriam Libre Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Miriam",
+    "file": "Miriam.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "MiriamLibre Regular",
+    "file": "MiriamLibre-Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Miso",
+    "file": "Miso.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "MS Outlook",
+    "file": "MS Outlook.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "MS Reference Sans Serif",
+    "file": "MS Reference Sans Serif.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "MS Reference Specialty",
+    "file": "MS Reference Specialty.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "MT Extra",
+    "file": "MT Extra.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Narkisim",
+    "file": "Narkisim.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Neo",
+    "file": "Neo.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Nk Fairy Regular",
+    "file": "Nk Fairy Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noam",
+    "file": "Noam.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Noto Rashi Hebrew Black",
+    "file": "Noto Rashi Hebrew Black.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Rashi Hebrew Bold",
+    "file": "Noto Rashi Hebrew Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Rashi Hebrew ExtraBold",
+    "file": "Noto Rashi Hebrew ExtraBold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Rashi Hebrew ExtraLight",
+    "file": "Noto Rashi Hebrew ExtraLight.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Rashi Hebrew Light",
+    "file": "Noto Rashi Hebrew Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Rashi Hebrew Medium",
+    "file": "Noto Rashi Hebrew Medium.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Rashi Hebrew Regular",
+    "file": "Noto Rashi Hebrew Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Rashi Hebrew SemiBold",
+    "file": "Noto Rashi Hebrew SemiBold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Rashi Hebrew Thin",
+    "file": "Noto Rashi Hebrew Thin.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew Black",
+    "file": "Noto Sans Hebrew Black.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew Bold",
+    "file": "Noto Sans Hebrew Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew Condensed Black",
+    "file": "Noto Sans Hebrew Condensed Black.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew Condensed Bold",
+    "file": "Noto Sans Hebrew Condensed Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew Condensed ExtraBold",
+    "file": "Noto Sans Hebrew Condensed ExtraBold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew Condensed ExtraLight",
+    "file": "Noto Sans Hebrew Condensed ExtraLight.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew Condensed Light",
+    "file": "Noto Sans Hebrew Condensed Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew Condensed Medium",
+    "file": "Noto Sans Hebrew Condensed Medium.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew Condensed SemiBold",
+    "file": "Noto Sans Hebrew Condensed SemiBold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew Condensed Thin",
+    "file": "Noto Sans Hebrew Condensed Thin.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew Condensed",
+    "file": "Noto Sans Hebrew Condensed.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew ExtraBold",
+    "file": "Noto Sans Hebrew ExtraBold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew ExtraCondensed Black",
+    "file": "Noto Sans Hebrew ExtraCondensed Black.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew ExtraCondensed Bold",
+    "file": "Noto Sans Hebrew ExtraCondensed Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew ExtraCondensed ExtraBold",
+    "file": "Noto Sans Hebrew ExtraCondensed ExtraBold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew ExtraCondensed ExtraLight",
+    "file": "Noto Sans Hebrew ExtraCondensed ExtraLight.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew ExtraCondensed Light",
+    "file": "Noto Sans Hebrew ExtraCondensed Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew ExtraCondensed Medium",
+    "file": "Noto Sans Hebrew ExtraCondensed Medium.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew ExtraCondensed SemiBold",
+    "file": "Noto Sans Hebrew ExtraCondensed SemiBold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew ExtraCondensed Thin",
+    "file": "Noto Sans Hebrew ExtraCondensed Thin.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew ExtraCondensed",
+    "file": "Noto Sans Hebrew ExtraCondensed.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew ExtraLight",
+    "file": "Noto Sans Hebrew ExtraLight.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew Light",
+    "file": "Noto Sans Hebrew Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew Medium",
+    "file": "Noto Sans Hebrew Medium.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew Regular",
+    "file": "Noto Sans Hebrew Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew SemiBold",
+    "file": "Noto Sans Hebrew SemiBold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew SemiCondensed Black",
+    "file": "Noto Sans Hebrew SemiCondensed Black.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew SemiCondensed Bold",
+    "file": "Noto Sans Hebrew SemiCondensed Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew SemiCondensed ExtraBold",
+    "file": "Noto Sans Hebrew SemiCondensed ExtraBold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew SemiCondensed ExtraLight",
+    "file": "Noto Sans Hebrew SemiCondensed ExtraLight.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew SemiCondensed Light",
+    "file": "Noto Sans Hebrew SemiCondensed Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew SemiCondensed Medium",
+    "file": "Noto Sans Hebrew SemiCondensed Medium.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew SemiCondensed SemiBold",
+    "file": "Noto Sans Hebrew SemiCondensed SemiBold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew SemiCondensed Thin",
+    "file": "Noto Sans Hebrew SemiCondensed Thin.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew SemiCondensed",
+    "file": "Noto Sans Hebrew SemiCondensed.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Sans Hebrew Thin",
+    "file": "Noto Sans Hebrew Thin.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Noto Serif Hebrew Regular",
+    "file": "Noto Serif Hebrew Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Nuba",
+    "file": "Nuba.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Nymphette",
+    "file": "Nymphette.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Palatino Linotype Bold Italic",
+    "file": "Palatino Linotype Bold Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Palatino Linotype Bold",
+    "file": "Palatino Linotype Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Palatino Linotype Italic",
+    "file": "Palatino Linotype Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Palatino Linotype",
+    "file": "Palatino Linotype.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "PatchSerif",
+    "file": "PatchSerif.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "PatchStencil",
+    "file": "PatchStencil.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Rashi DP",
+    "file": "Rashi DP.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "RmzDavid Bold",
+    "file": "RmzDavid-Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "RmzDavid",
+    "file": "RmzDavid.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "RmzFrank Bold",
+    "file": "RmzFrank-Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "RmzFrank",
+    "file": "RmzFrank.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "RmzGaled Bold",
+    "file": "RmzGaled-Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "RmzGaled",
+    "file": "RmzGaled.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "RmzHadas Bold",
+    "file": "RmzHadas-Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "RmzHadas",
+    "file": "RmzHadas.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "RmzMeiri Bold",
+    "file": "RmzMeiri-Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "RmzMeiri",
+    "file": "RmzMeiri.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "RmzRashi Bold",
+    "file": "RmzRashi-Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "RmzRashi",
+    "file": "RmzRashi.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "RmzSofer",
+    "file": "RmzSofer.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "RmzVilna Bold",
+    "file": "RmzVilna-Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "RmzVilna",
+    "file": "RmzVilna.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rod",
+    "file": "Rod.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Beastly Regular",
+    "file": "Rubik Beastly Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Bold Italic",
+    "file": "Rubik Bold Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Italic",
+    "file": "Rubik Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik One Regular",
+    "file": "Rubik One Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik 80sFade Regular",
+    "file": "Rubik-80sFade Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Black",
+    "file": "Rubik-Black.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Bold",
+    "file": "Rubik-Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik BrokenFax Regular",
+    "file": "Rubik-BrokenFax Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Bubbles Regular",
+    "file": "Rubik-Bubbles Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Burned Regular",
+    "file": "Rubik-Burned Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Dirt Regular",
+    "file": "Rubik-Dirt Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Distressed Regular",
+    "file": "Rubik-Distressed Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik DoodleShadow Regular",
+    "file": "Rubik-DoodleShadow Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik DoodleTriangles Regular",
+    "file": "Rubik-DoodleTriangles Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Gemstones Regular",
+    "file": "Rubik-Gemstones Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Glitch Regular",
+    "file": "Rubik-Glitch Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik GlitchPop Regular",
+    "file": "Rubik-GlitchPop Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Goo Regular",
+    "file": "Rubik-Goo Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Iso Regular",
+    "file": "Rubik-Iso Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Light",
+    "file": "Rubik-Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Lines Regular",
+    "file": "Rubik-Lines Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Maps Regular",
+    "file": "Rubik-Maps Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik MarkerHatch Regular",
+    "file": "Rubik-MarkerHatch Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Maze Regular",
+    "file": "Rubik-Maze Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Medium",
+    "file": "Rubik-Medium.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Microbe Regular",
+    "file": "Rubik-Microbe Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik MoonRocks Regular",
+    "file": "Rubik-MoonRocks Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Pixels Regular",
+    "file": "Rubik-Pixels Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Puddles Regular",
+    "file": "Rubik-Puddles Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Regular",
+    "file": "Rubik-Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Scribble Regular",
+    "file": "Rubik-Scribble Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik SeaCamouflage Regular",
+    "file": "Rubik-SeaCamouflage Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik SprayPaint Regular",
+    "file": "Rubik-SprayPaint Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Storm Regular",
+    "file": "Rubik-Storm Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik Vinyl Regular",
+    "file": "Rubik-Vinyl Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Rubik WetPaint Regular",
+    "file": "Rubik-WetPaint Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "S Vilna New",
+    "file": "S-Vilna-New.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sayphan",
+    "file": "Sayphan.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "SecularOne Regular",
+    "file": "SecularOne-Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe Fluent Icons",
+    "file": "Segoe Fluent Icons.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe MDL2 Assets",
+    "file": "Segoe MDL2 Assets.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe Print Bold",
+    "file": "Segoe Print Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe Print",
+    "file": "Segoe Print.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe Script Bold",
+    "file": "Segoe Script Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe Script",
+    "file": "Segoe Script.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe UI Black Italic",
+    "file": "Segoe UI Black Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe UI Black",
+    "file": "Segoe UI Black.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe UI Bold Italic",
+    "file": "Segoe UI Bold Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe UI Bold",
+    "file": "Segoe UI Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe UI Emoji",
+    "file": "Segoe UI Emoji.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe UI Italic",
+    "file": "Segoe UI Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe UI Light Italic",
+    "file": "Segoe UI Light Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe UI Light",
+    "file": "Segoe UI Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe UI Semibold Italic",
+    "file": "Segoe UI Semibold Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe UI Semibold",
+    "file": "Segoe UI Semibold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe UI Semilight Italic",
+    "file": "Segoe UI Semilight Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe UI Semilight",
+    "file": "Segoe UI Semilight.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe UI Symbol",
+    "file": "Segoe UI Symbol.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe UI Variable",
+    "file": "Segoe UI Variable.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Segoe UI",
+    "file": "Segoe UI.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Shuneet3 Bold",
+    "file": "Shuneet3 Bold.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Shuneet3 Book",
+    "file": "Shuneet3 Book.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Shuneet3 Classic Bold",
+    "file": "Shuneet3 Classic Bold.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Shuneet3 Classic Italic Bold",
+    "file": "Shuneet3 Classic Italic Bold.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Shuneet3 Classic Italic",
+    "file": "Shuneet3 Classic Italic.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Shuneet3 Classic",
+    "file": "Shuneet3 Classic.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Shuneet3 Demi",
+    "file": "Shuneet3 Demi.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Shuneet3 Heavy",
+    "file": "Shuneet3 Heavy.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Shuneet3 Light",
+    "file": "Shuneet3 Light.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Shuneet3 Medium",
+    "file": "Shuneet3 Medium.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Shuneet3 Original Bold",
+    "file": "Shuneet3 Original Bold.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Shuneet3 Original",
+    "file": "Shuneet3 Original.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Shuneet3 Square Bold",
+    "file": "Shuneet3 Square Bold.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Shuneet3 Square",
+    "file": "Shuneet3 Square.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Shuneet3 Thin",
+    "file": "Shuneet3 Thin.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Skechers",
+    "file": "Skechers.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Sn agan haayalot Regular",
+    "file": "Sn agan haayalot Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "SN ale zait",
+    "file": "SN ale zait.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Sn anafim Regular",
+    "file": "Sn anafim Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sn aqua Regular",
+    "file": "Sn aqua Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sn armilado",
+    "file": "Sn armilado.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "SN arnav",
+    "file": "SN arnav.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "SN artik",
+    "file": "SN artik.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "SN avigdor",
+    "file": "SN avigdor.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Sn azrash Regular",
+    "file": "Sn azrash Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sn azura Regular",
+    "file": "Sn azura Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Sn blompa",
+    "file": "Sn blompa.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "SN bloom Regular",
+    "file": "SN bloom Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Sn brakim Regular",
+    "file": "Sn brakim Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Sn chedva Regular",
+    "file": "Sn chedva Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Sn elmirado mehubar",
+    "file": "Sn elmirado-mehubar.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Sn gavriel",
+    "file": "Sn gavriel.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sn katsefet Regular",
+    "file": "Sn katsefet Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sn kishkushim 1 Regular",
+    "file": "Sn kishkushim 1 Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sn kishkushim 2 Regular",
+    "file": "Sn kishkushim 2 Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sn kishkushim 3 Regular",
+    "file": "Sn kishkushim 3 Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "SN kiyufim",
+    "file": "SN kiyufim.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "SN mavoch",
+    "file": "SN mavoch.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Sn megila Regular",
+    "file": "Sn megila Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "SN mekurzelet",
+    "file": "SN mekurzelet.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Sn mr comics Regular",
+    "file": "Sn mr comics Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sn nitshonot Regular",
+    "file": "Sn nitshonot Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sn odelya Regular",
+    "file": "Sn odelya Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Sn rakefet Regular",
+    "file": "Sn rakefet Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Sn sabres Regular",
+    "file": "Sn sabres Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sn sad hataim Regular",
+    "file": "Sn sad hataim Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "SN sfinot",
+    "file": "SN sfinot.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Sn shalhevet",
+    "file": "Sn shalhevet.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sn sheleg Regular",
+    "file": "Sn sheleg Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Sn shiranke",
+    "file": "Sn shiranke.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sn slichot Regular",
+    "file": "Sn slichot Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sn technologia blor Regular",
+    "file": "Sn technologia blor Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sn technologia Regular",
+    "file": "Sn technologia Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sn tishrey Regular",
+    "file": "Sn tishrey Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sn tishu paper Regular",
+    "file": "Sn tishu paper Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "SN toys Regular",
+    "file": "SN toys Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "SN tuganim",
+    "file": "SN tuganim.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Sn yaakov Regular",
+    "file": "Sn yaakov Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Start First Regular",
+    "file": "Start First Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Sticks",
+    "file": "Sticks.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Stopmotion",
+    "file": "Stopmotion.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Strokes",
+    "file": "Strokes.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "SuezOne Regular",
+    "file": "SuezOne-Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Symbol",
+    "file": "Symbol.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Tahoma Bold",
+    "file": "Tahoma Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Tahoma",
+    "file": "Tahoma.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Tehila",
+    "file": "Tehila.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "TehilaMedium",
+    "file": "TehilaMedium.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Times New Roman Bold Italic",
+    "file": "Times New Roman Bold Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Times New Roman Bold",
+    "file": "Times New Roman Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Times New Roman Italic",
+    "file": "Times New Roman Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Times New Roman",
+    "file": "Times New Roman.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Tinos Bold Italic",
+    "file": "Tinos Bold Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Tinos Bold",
+    "file": "Tinos Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Tinos Italic",
+    "file": "Tinos Italic.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Tinos",
+    "file": "Tinos.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Toolsamirfont Regular",
+    "file": "Toolsamirfont Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Tooshalim Regular",
+    "file": "Tooshalim Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Trashim CLM Bold",
+    "file": "Trashim CLM Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Truetypewriter PolyglOTT",
+    "file": "Truetypewriter PolyglOTT.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "TsMatka Bold",
+    "file": "TsMatka-Bold.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "TsMatka Regular",
+    "file": "TsMatka-Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Tzeva Tari",
+    "file": "Tzeva Tari.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "VarelaRound Regular",
+    "file": "VarelaRound-Regular.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "VILNA מתוקן DP Bold",
+    "file": "VILNA מתוקן DP Bold.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "VILNA מתוקן DP",
+    "file": "VILNA מתוקן DP.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Webdings",
+    "file": "Webdings.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Wingdings 2",
+    "file": "Wingdings 2.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Wingdings 3",
+    "file": "Wingdings 3.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Wingdings",
+    "file": "Wingdings.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Yehuda CLM Bold",
+    "file": "Yehuda CLM Bold.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "Yehuda CLM Light",
+    "file": "Yehuda CLM Light.ttf",
+    "format": "truetype"
+  },
+  {
+    "family": "YitzhakNavon DropCaps",
+    "file": "YitzhakNavon-DropCaps.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "YitzhakNavon Regular",
+    "file": "YitzhakNavon-Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Yonatan Amami Regular",
+    "file": "Yonatan Amami Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "Yonatan Amami styled Regular",
+    "file": "Yonatan Amami styled Regular.otf",
+    "format": "opentype"
+  },
+  {
+    "family": "ZDingbats Medium",
+    "file": "ZDingbats Medium.ttf",
+    "format": "truetype"
+  }
+]
