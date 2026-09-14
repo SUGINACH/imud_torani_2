@@ -1,5 +1,6 @@
 /* ==========================================================================
    decorations.js - מאגר עיטורים, שערים ואלמנטים גרפיים (SVG)
+   גרסה מעודכנת עם שליטה מלאה במידות, Full-Bleed וסנכרון ערכות
    ========================================================================== */
 
 const CBG_TEXTURE_SVG = "data:image/svg+xml,%3Csvg width='32' height='55' viewBox='0 0 32 55' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16,27 C10,22 5,14 5,5 C5,0 10,0 16,5 C22,0 27,0 27,5 C27,14 22,22 16,27 Z M16,27 C10,32 5,40 5,49 C5,55 10,55 16,49 C22,55 27,55 27,49 C27,40 22,32 16,27 Z M16,14 A3.5,3.5 0 1,0 16,21 A3.5,3.5 0 1,0 16,14 Z' fill='%239e9e9e' fill-opacity='0.18'/%3E%3C/svg%3E";
@@ -12,29 +13,19 @@ const EXTERNAL_SHAAR_ASSETS = {
     back: {},
     sub: {}
 };
-const ORNAMENTS_LR = {};
-const ORNAMENTS_UD = {};
+const ORNAMENTS_LR = {
+    diamonds: { id: 'diamonds', name: 'מעויינים', svg: '<span style="letter-spacing:2px; font-size:9pt;">❖</span>' },
+    spear: { id: 'spear', name: 'רומח', svg: '<svg viewBox="0 0 120 40" style="height:1em; width:auto;"><circle cx="60" cy="20" r="10" fill="none" stroke="#444" stroke-width="4.5"/><circle cx="60" cy="20" r="4.5" fill="#444"/><path d="M42,20 C42,24 25,27 5,27 C5,20 5,13 5,13 C25,13 42,16 42,20 Z" fill="#444"/></svg>' },
+    swash: { id: 'swash', name: 'שושנתא', svg: '<svg viewBox="0 0 60 28" style="height:1em; width:auto;" fill="#444"><path d="M10,14 C25,14 30,4 38,4 C45,4 48,11 50,17 C48,11 45,4 38,4 A5,5 0 1,0 50,17"/></svg>' },
+    pen: { id: 'pen', name: 'סלסול', svg: '<svg viewBox="0 0 70 40" style="height:1em; width:auto;"><path d="M15,28 C3,21 8,11 19,14 C25,16 27,24 22,29 C17,34 9,30 7,23" fill="none" stroke="#444" stroke-width="2.5" stroke-linecap="round"/></svg>' }
+};
+const ORNAMENTS_UD = {
+    diamonds: { id: 'diamonds', name: 'מעויינים', svg: '<span style="letter-spacing:3px; font-size:9pt;">◈ ❖ ◈</span>' },
+    spear: { id: 'spear', name: 'רומח', svg: '<svg viewBox="0 0 400 40"><circle cx="200" cy="20" r="10" fill="none" stroke="#444" stroke-width="4.5"/><circle cx="200" cy="20" r="4.5" fill="#444"/><path d="M182,20 C182,24 165,27 140,27 C90,27 40,22 5,20 C40,18 90,13 140,13 C165,13 182,16 182,20 Z" fill="#444"/><path d="M218,20 C218,24 235,27 260,27 C310,27 360,22 395,20 C360,18 310,13 260,13 C235,13 218,16 218,20 Z" fill="#444"/></svg>' },
+    swash: { id: 'swash', name: 'שושנתא', svg: '<svg viewBox="0 0 320 28" fill="#444"><path d="M10,14 C60,14 85,4 125,4 C145,4 152,11 160,17 C168,11 175,4 195,4 C235,4 260,14 310,14 C260,14 235,24 195,24 C175,24 168,17 160,11 C152,17 145,24 125,24 C85,24 60,14 10,14 Z M160,7 A5,5 0 1,0 160,21 A5,5 0 1,0 160,7 Z"/></svg>' },
+    pen: { id: 'pen', name: 'סלסול', svg: '<svg viewBox="0 0 280 80"><g stroke="#444" fill="none" stroke-linecap="round"><path d="M30,55 C12,42 22,22 38,28 C50,32 55,48 45,58 C35,68 18,60 14,46 C10,32 25,18 42,22 C65,28 85,65 118,68 C128,69 135,62 135,50 C135,38 124,32 115,38" stroke-width="3"/><path d="M250,55 C268,42 258,22 242,28 C230,32 225,48 235,58 C245,68 262,60 266,46 C270,32 255,18 238,22 C215,28 195,65 162,68 C152,69 145,62 145,50 C145,38 156,32 165,38" stroke-width="3"/></g></svg>' }
+};
 const EXTERNAL_ALL_ORNAMENTS = {};
-
-/* ==========================================================================
-   מיקום תיבת טקסט שער - שמור לכל שער ספציפי בנפרד
-   כשגוררים/משנים גודל את תיבת הטקסט על שער מסוים (ע"י select-shaar-main/
-   back/sub), המיקום נשמר כאן לפי מזהה השער הספציפי (למשל 'builtin_2' או
-   מזהה שער שנטען מ-JSON) - כך שבחירה חוזרת באותו שער תחזיר את אותה
-   הצמדה, במקום שכל השערים ישתפו הצמדה גלובלית אחת (כפי שהיה).
-   ========================================================================== */
-let shaarBoxSavedPositions = { main: {}, back: {}, sub: {} };
-
-function resolveShaarBoxStyle(shaarType, shaarId, uTop, uBottom, uRight, uLeft, fallbackStyle) {
-    const saved = shaarBoxSavedPositions[shaarType] && shaarBoxSavedPositions[shaarType][shaarId];
-    if (saved) {
-        return `position:absolute; top:${saved.top}mm; bottom:${saved.bottom}mm; right:${saved.right}mm; left:${saved.left}mm;`;
-    }
-    if (uTop || uBottom || uRight || uLeft) {
-        return `position:absolute; top:${uTop || fallbackStyle.top}mm; bottom:${uBottom || fallbackStyle.bottom}mm; right:${uRight || fallbackStyle.right}mm; left:${uLeft || fallbackStyle.left}mm;`;
-    }
-    return null; // אין שמירה ואין דריסה גלובלית - הקורא ימשיך לנפילה הבאה (customTheme / BUILTIN / קבוע)
-}
 
 function registerExternalShaarAsset(typeKey, id, name, svgContent) {
     if (EXTERNAL_SHAAR_ASSETS[typeKey]) {
@@ -54,17 +45,25 @@ function registerExternalAllOrnament(id, svgContent) {
     EXTERNAL_ALL_ORNAMENTS[id] = svgContent;
 }
 
+function wrapSvgAsShaarBg(svg) {
+    if (!svg) return '';
+    if (svg.includes('class="custom-bg-img"')) return svg;
+    if (svg.startsWith('<svg')) {
+        return svg.replace(/<svg\b([^>]*)>/i, '<svg class="custom-bg-img" preserveAspectRatio="none" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:5;" $1>');
+    }
+    return svg;
+}
+
 /* ==========================================================================
    1. עיטורי כותרת עליונה ומקורות תוכן מורחבים
    ========================================================================== */
 const HEADER_ORNAMENTS = {
-    diamonds: '<span style="letter-spacing:3px;">◈ ❖ ◈</span>',
-    spear: '<svg style="height:9px; width:48px;" viewBox="0 0 400 40"><circle cx="200" cy="20" r="10" fill="none" stroke="#444" stroke-width="4.5"/><circle cx="200" cy="20" r="4.5" fill="#444"/><path d="M182,20 C182,24 165,27 140,27 C90,27 40,22 5,20 C40,18 90,13 140,13 C165,13 182,16 182,20 Z" fill="#444"/><path d="M218,20 C218,24 235,27 260,27 C310,27 360,22 395,20 C360,18 310,13 260,13 C235,13 218,16 218,20 Z" fill="#444"/></svg>',
-    swash: '<svg style="height:12px; width:44px; fill:#444;" viewBox="0 0 320 28"><path d="M10,14 C60,14 85,4 125,4 C145,4 152,11 160,17 C168,11 175,4 195,4 C235,4 260,14 310,14 C260,14 235,24 195,24 C175,24 168,17 160,11 C152,17 145,24 125,24 C85,24 60,14 10,14 Z M160,7 A5,5 0 1,0 160,21 A5,5 0 1,0 160,7 Z"/></svg>',
-    pen: '<svg style="height:12px; width:44px;" viewBox="0 0 280 80"><g stroke="#444" fill="none" stroke-linecap="round"><path d="M30,55 C12,42 22,22 38,28 C50,32 55,48 45,58 C35,68 18,60 14,46 C10,32 25,18 42,22 C65,28 85,65 118,68 C128,69 135,62 135,50 C135,38 124,32 115,38" stroke-width="3"/><path d="M250,55 C268,42 258,22 242,28 C230,32 225,48 235,58 C245,68 262,60 266,46 C270,32 255,18 238,22 C215,28 195,65 162,68 C152,69 145,62 145,50 C145,38 156,32 165,38" stroke-width="3"/></g></svg>'
+    diamonds: '<span style="letter-spacing:3px; font-size:9pt;">◈ ❖ ◈</span>',
+    spear: '<svg viewBox="0 0 400 40"><circle cx="200" cy="20" r="10" fill="none" stroke="#444" stroke-width="4.5"/><circle cx="200" cy="20" r="4.5" fill="#444"/><path d="M182,20 C182,24 165,27 140,27 C90,27 40,22 5,20 C40,18 90,13 140,13 C165,13 182,16 182,20 Z" fill="#444"/><path d="M218,20 C218,24 235,27 260,27 C310,27 360,22 395,20 C360,18 310,13 260,13 C235,13 218,16 218,20 Z" fill="#444"/></svg>',
+    swash: '<svg viewBox="0 0 320 28" fill="#444"><path d="M10,14 C60,14 85,4 125,4 C145,4 152,11 160,17 C168,11 175,4 195,4 C235,4 260,14 310,14 C260,14 235,24 195,24 C175,24 168,17 160,11 C152,17 145,24 125,24 C85,24 60,14 10,14 Z M160,7 A5,5 0 1,0 160,21 A5,5 0 1,0 160,7 Z"/></svg>',
+    pen: '<svg viewBox="0 0 280 80"><g stroke="#444" fill="none" stroke-linecap="round"><path d="M30,55 C12,42 22,22 38,28 C50,32 55,48 45,58 C35,68 18,60 14,46 C10,32 25,18 42,22 C65,28 85,65 118,68 C128,69 135,62 135,50 C135,38 124,32 115,38" stroke-width="3"/><path d="M250,55 C268,42 258,22 242,28 C230,32 225,48 235,58 C245,68 262,60 266,46 C270,32 255,18 238,22 C215,28 195,65 162,68 C152,69 145,62 145,50 C145,38 156,32 165,38" stroke-width="3"/></g></svg>'
 };
 
-// פיצול מחרוזת מילים לשני חצאים (עבור פיצול שם הספר בין ימין לשמאל)
 function splitTextInHalf(text, part) {
     if (!text) return '';
     const words = text.trim().split(/\s+/);
@@ -89,11 +88,17 @@ function renderHeaderSectionHTML(type, customText, h1Title, h2Title, h3Title, bo
     if (type === 'page_number') return pageNum ? String(pageNum) : '';
     if (type === 'first_word_last_word') return firstLastWords || '';
     if (type === 'custom') return customText || '';
-    if (HEADER_ORNAMENTS[type]) return HEADER_ORNAMENTS[type];
-    if (EXTERNAL_ALL_ORNAMENTS[type]) return EXTERNAL_ALL_ORNAMENTS[type];
-    if (type === 'custom_img') {
-        const imgSrc = document.getElementById('data-hdr-c-img') ? document.getElementById('data-hdr-c-img').value : '';
-        return imgSrc ? `<img src="${imgSrc}" style="max-height: 18px; max-width: 100%; object-fit: contain; vertical-align: middle;" />` : '';
+
+    let rawSvg = '';
+    if (HEADER_ORNAMENTS[type]) rawSvg = HEADER_ORNAMENTS[type];
+    else if (EXTERNAL_ALL_ORNAMENTS[type]) rawSvg = EXTERNAL_ALL_ORNAMENTS[type];
+    else if (type === 'custom_img') {
+        const imgSrc = document.getElementById('data-hdr-c-img')?.value || '';
+        if (imgSrc) rawSvg = `<img src="${imgSrc}" alt="עיטור" />`;
+    }
+
+    if (rawSvg) {
+        return `<span class="header-ornament-wrap">${rawSvg}</span>`;
     }
     return '';
 }
@@ -112,7 +117,11 @@ function getSectionDividerHTML(type) {
     if (!type || type === 'none') return '';
     const userW = document.getElementById('dim-secdiv-w')?.value;
     const userH = document.getElementById('dim-secdiv-h')?.value;
-    const dimStyle = (userW ? `width: ${userW}; ` : '') + (userH ? `height: ${userH}; max-height: ${userH}; ` : '');
+    // הרוחב/גובה חייבים להשפיע על האלמנט הפנימי (ה-SVG/תמונה) ולא רק על
+    // ה-wrapper החיצוני — אחרת הקופסה משנה גודל אבל התוכן שבפנים נשאר
+    // בגודלו המקורי ונראה כאילו ההגדרה לא עשתה כלום. מעבירים דרך CSS
+    // custom properties שכלל ב-style.css קורא ומחיל על ה-svg/img הפנימיים.
+    const dimStyle = (userW ? `--secdiv-w: ${userW}; ` : '') + (userH ? `--secdiv-h: ${userH}; ` : '');
 
     let content = '';
     if (SECTION_DIVIDERS[type]) {
@@ -122,40 +131,47 @@ function getSectionDividerHTML(type) {
     } else if (type === 'custom_img') {
         const imgSrc = document.getElementById('data-sec-div-img')?.value || '';
         if (imgSrc) {
-            content = `<img src="${imgSrc}" style="max-width: 100%; max-height: 45px; margin: auto; display: block; object-fit: contain; ${dimStyle}" />`;
+            content = `<img src="${imgSrc}" style="max-width: 100%; max-height: 45px; margin: auto; display: block; object-fit: contain;" />`;
         }
     }
     if (!content) return '';
-    return `<div class="sec-divider-wrap" style="grid-column: 3 / 6; text-align: center; margin: 16px auto 6px auto; ${dimStyle ? 'display:flex; justify-content:center; align-items:center;' : ''}">${content}</div>`;
+    return `<div class="sec-divider-wrap" style="grid-column: 3 / 6; text-align: center; margin: 16px auto 6px auto; ${dimStyle} ${dimStyle ? 'display:flex; justify-content:center; align-items:center;' : ''}">${content}</div>`;
 }
 
 function getHeadingOrnamentHTML(type, isTop = false, isH2 = true) {
     if (!type || type === 'none') return '';
     const flipStyle = isTop ? 'transform: scaleY(-1);' : '';
     
-    // שליטה במידות מותאמות אישית
     const prefix = isH2 ? (isTop ? 'dim-h2-top' : 'dim-h2-btm') : 'dim-generic';
-    const userW = document.getElementById(`${prefix}-w`)?.value;
-    const userH = document.getElementById(`${prefix}-h`)?.value;
+// שורות 132-133 (בתוך getHeadingOrnamentHTML):
+    const userW = document.getElementById(prefix + '-w')?.value;
+    const userH = document.getElementById(prefix + '-h')?.value;
     const fitToText = isH2 && document.getElementById('h2-orn-fit-text')?.checked;
     
     let sizeStyle = '';
-    if (userW) sizeStyle += `width: ${userW}; `;
-    if (userH) sizeStyle += `height: ${userH}; max-height: ${userH}; `;
-    if (fitToText) sizeStyle += `width: 100% !important; max-width: 100% !important; `;
+    if (fitToText) {
+        sizeStyle = 'width: 100% !important; max-width: 100% !important; ';
+    } else {
+        if (userW) sizeStyle += `width: ${userW}; `;
+        if (userH) sizeStyle += `height: ${userH}; max-height: ${userH}; `;
+    }
 
     let inner = '';
     if (ORNAMENTS_UD[type]) {
-        inner = `<div class="ornament-svg-inner" style="display:inline-flex; align-items:center; justify-content:center; ${flipStyle} ${sizeStyle}">${ORNAMENTS_UD[type].svg}</div>`;
+        let svg = ORNAMENTS_UD[type].svg;
+        if (fitToText && svg.startsWith('<svg')) {
+            svg = svg.replace(/<svg\b([^>]*)>/i, '<svg preserveAspectRatio="none" $1>');
+        }
+        inner = `<div class="ornament-svg-inner" style="display:flex; align-items:center; justify-content:center; width:100%; ${flipStyle} ${sizeStyle}">${svg}</div>`;
     } else if (type === 'custom_img') {
         const imgSrc = document.getElementById('data-sec-div-img')?.value || '';
         if (imgSrc) {
-            inner = `<img src="${imgSrc}" style="max-width: 200px; max-height: 35px; margin: auto; display: block; object-fit: contain; ${flipStyle} ${sizeStyle}" />`;
+            inner = `<img src="${imgSrc}" style="max-width: 100%; max-height: 35px; margin: auto; display: block; object-fit: contain; ${flipStyle} ${sizeStyle}" />`;
         }
     }
     if (!inner) return '';
     const fitClass = fitToText ? ' fit-heading-text' : '';
-    return `<div class="heading-ornament-wrap${fitClass}" style="text-align:center; margin: 6px auto;">${inner}</div>`;
+    return `<div class="heading-ornament-wrap${fitClass}" style="text-align:center; width:100%; margin: 4px auto;">${inner}</div>`;
 }
 
 function renderSideOrnamentHTML(styleKey, isLeft = false, context = 'h3') {
@@ -163,8 +179,9 @@ function renderSideOrnamentHTML(styleKey, isLeft = false, context = 'h3') {
     const flipStyle = isLeft ? 'transform: scaleX(-1);' : '';
     
     const prefix = context === 'note' ? 'dim-note-side' : 'dim-h3-side';
-    const userW = document.getElementById(`${prefix}-w`)?.value;
-    const userH = document.getElementById(`${prefix}-h`)?.value;
+// שורות 167-168 (בתוך renderSideOrnamentHTML):
+    const userW = document.getElementById(prefix + '-w')?.value;
+    const userH = document.getElementById(prefix + '-h')?.value;
     let sizeStyle = '';
     if (userW) sizeStyle += `width: ${userW}; `;
     if (userH) sizeStyle += `height: ${userH}; max-height: ${userH}; `;
@@ -179,7 +196,7 @@ function renderSideOrnamentHTML(styleKey, isLeft = false, context = 'h3') {
 }
 
 /* ==========================================================================
-   3. קווי מפריד להערות שוליים (כולל "ללא", קו קצר, קו חצי וקו כפול)
+   3. קווי מפריד להערות שוליים
    ========================================================================== */
 const NOTE_RULE_GLYPHS = {
     dots: '◦◦◦',
@@ -284,7 +301,7 @@ function getShaarBoxEditorHTML(shaarType) {
 }
 
 /* ============================================================
-   5. פונקציות יצירת דפי השער (כולל שליטה בממדים אישיים)
+   5. פונקציות יצירת דפי השער
    ============================================================ */
 function renderMainShaar(container, themeId) {
     const page = document.createElement('div');
@@ -306,37 +323,33 @@ function renderMainShaar(container, themeId) {
 
     if (selMain !== 'theme_default') {
         if (EXTERNAL_SHAAR_ASSETS.main[selMain]) {
-            frameHTML = EXTERNAL_SHAAR_ASSETS.main[selMain];
+            frameHTML = wrapSvgAsShaarBg(EXTERNAL_SHAAR_ASSETS.main[selMain]);
         } else if (BUILTIN_SHAAR_THEMES[selMain]) {
-            frameHTML = BUILTIN_SHAAR_THEMES[selMain].mainHTML;
+            frameHTML = wrapSvgAsShaarBg(BUILTIN_SHAAR_THEMES[selMain].mainHTML);
         }
     } else if (customTheme && customTheme.mainShaar && customTheme.mainShaar.svgData) {
         frameHTML = `<img class="custom-bg-img" src="${customTheme.mainShaar.svgData}" alt="שער ראשי">`;
     } else if (BUILTIN_SHAAR_THEMES[themeId]) {
-        frameHTML = BUILTIN_SHAAR_THEMES[themeId].mainHTML;
+        frameHTML = wrapSvgAsShaarBg(BUILTIN_SHAAR_THEMES[themeId].mainHTML);
     }
 
-    // קריאת שולי תיבת הטקסט
     const uTop = document.getElementById('builder-main-top')?.value;
     const uBottom = document.getElementById('builder-main-bottom')?.value;
     const uRight = document.getElementById('builder-main-right')?.value;
     const uLeft = document.getElementById('builder-main-left')?.value;
 
-    const shaarBoxId = selMain !== 'theme_default' ? selMain : ('theme_default:' + themeId);
-
-    boxStyle = resolveShaarBoxStyle('main', shaarBoxId, uTop, uBottom, uRight, uLeft, { top: 20, bottom: 16, right: 15, left: 15 });
-    if (!boxStyle) {
-        if (customTheme && customTheme.mainShaar) {
-            const m = customTheme.mainShaar;
-            boxStyle = `position:absolute; top:${m.top}mm; bottom:${m.bottom}mm; right:${m.right}mm; left:${m.left}mm;`;
-        } else {
-            boxStyle = `position:absolute; top:20mm; bottom:16mm; right:15mm; left:15mm;`;
-        }
+    if (uTop || uBottom || uRight || uLeft) {
+        boxStyle = `position:absolute; top:${uTop || 20}mm; bottom:${uBottom || 16}mm; right:${uRight || 15}mm; left:${uLeft || 15}mm;`;
+    } else if (customTheme && customTheme.mainShaar) {
+        const m = customTheme.mainShaar;
+        boxStyle = `position:absolute; top:${m.top}mm; bottom:${m.bottom}mm; right:${m.right}mm; left:${m.left}mm;`;
+    } else {
+        boxStyle = `position:absolute; top:20mm; bottom:16mm; right:15mm; left:15mm;`;
     }
 
     page.innerHTML = `
     ${frameHTML}
-    <div class="shaar-main-content theme-bounded-content" data-shaar-type="main" data-shaar-id="${shaarBoxId}" style="${boxStyle}">
+    <div class="shaar-main-content theme-bounded-content" data-shaar-type="main" style="${boxStyle}">
       ${getShaarBoxEditorHTML('main')}
       <div>
         <div class="bsd-header">בס"ד</div>
@@ -367,6 +380,12 @@ function renderBackShaar(container, themeId) {
     const sections = document.getElementById('inp-book-sections')?.value || "";
     const author = document.getElementById('inp-book-author')?.value || "";
     const year = document.getElementById('inp-book-year')?.value || "";
+    const backText = document.getElementById('inp-back-shaar-text')?.value || 'כל הזכויות שמורות למחבר.';
+    const backTextHTML = backText.split('\n').filter(l => l.trim()).map((l, i) =>
+        i === 0
+            ? `<div style="font-size: 13pt; font-weight: 700; margin-bottom: 8px;">${l}</div>`
+            : `<div style="font-size: 10.5pt; line-height: 1.6; max-width: 90%; margin: 10px auto; color: #333;">${l}</div>`
+    ).join('');
 
     let bgHTML = '';
     let boxStyle = '';
@@ -376,14 +395,14 @@ function renderBackShaar(container, themeId) {
 
     if (selBack !== 'theme_default') {
         if (EXTERNAL_SHAAR_ASSETS.back[selBack]) {
-            bgHTML = EXTERNAL_SHAAR_ASSETS.back[selBack];
+            bgHTML = wrapSvgAsShaarBg(EXTERNAL_SHAAR_ASSETS.back[selBack]);
         } else if (BUILTIN_SHAAR_THEMES[selBack]) {
-            bgHTML = BUILTIN_SHAAR_THEMES[selBack].backHTML;
+            bgHTML = wrapSvgAsShaarBg(BUILTIN_SHAAR_THEMES[selBack].backHTML);
         }
     } else if (customTheme && customTheme.backShaar && customTheme.backShaar.svgData) {
         bgHTML = `<img class="custom-bg-img" src="${customTheme.backShaar.svgData}" alt="שער אחורי">`;
     } else if (BUILTIN_SHAAR_THEMES[themeId]) {
-        bgHTML = BUILTIN_SHAAR_THEMES[themeId].backHTML;
+        bgHTML = wrapSvgAsShaarBg(BUILTIN_SHAAR_THEMES[themeId].backHTML);
     } else {
         bgHTML = `<div class="back-shaar-bg-left"></div>`;
     }
@@ -393,29 +412,23 @@ function renderBackShaar(container, themeId) {
     const uRight = document.getElementById('builder-back-right')?.value;
     const uLeft = document.getElementById('builder-back-left')?.value;
 
-    const shaarBoxId = selBack !== 'theme_default' ? selBack : ('theme_default:' + themeId);
-
-    boxStyle = resolveShaarBoxStyle('back', shaarBoxId, uTop, uBottom, uRight, uLeft, { top: 22, bottom: 18, right: 15, left: 95 });
-    if (!boxStyle) {
-        if (customTheme && customTheme.backShaar) {
-            const m = customTheme.backShaar;
-            boxStyle = `position:absolute; top:${m.top}mm; bottom:${m.bottom}mm; right:${m.right}mm; left:${m.left}mm;`;
-        } else if (BUILTIN_SHAAR_THEMES[themeId]) {
-            boxStyle = BUILTIN_SHAAR_THEMES[themeId].backStyle;
-        } else {
-            boxStyle = `position:absolute; top:22mm; bottom:18mm; right:15mm; left:95mm;`;
-        }
+    if (uTop || uBottom || uRight || uLeft) {
+        boxStyle = `position:absolute; top:${uTop || 22}mm; bottom:${uBottom || 18}mm; right:${uRight || 15}mm; left:${uLeft || 95}mm;`;
+    } else if (customTheme && customTheme.backShaar) {
+        const m = customTheme.backShaar;
+        boxStyle = `position:absolute; top:${m.top}mm; bottom:${m.bottom}mm; right:${m.right}mm; left:${m.left}mm;`;
+    } else if (BUILTIN_SHAAR_THEMES[themeId]) {
+        boxStyle = BUILTIN_SHAAR_THEMES[themeId].backStyle;
+    } else {
+        boxStyle = `position:absolute; top:22mm; bottom:18mm; right:15mm; left:95mm;`;
     }
 
     page.innerHTML = `
     ${bgHTML}
-    <div class="theme-bounded-content" data-shaar-type="back" data-shaar-id="${shaarBoxId}" style="${boxStyle}">
+    <div class="theme-bounded-content" data-shaar-type="back" style="${boxStyle}">
       ${getShaarBoxEditorHTML('back')}
       <div>
-        <div style="font-size: 13pt; font-weight: 700; margin-bottom: 8px;">כל הזכויות שמורות</div>
-        <div style="font-size: 10.5pt; line-height: 1.6; max-width: 90%; margin: 10px auto; color: #333;">
-          אין לשכפל, להעתיק, לצלם, לתרגם, לאחסן במאגר מידע, למסור או לקלוט בכל דרך או אמצעי אלקטרוני, אופטי או מכני אחר כל חלק שהוא מספר זה, ללא רשות מפורשת בכתב מבעל הזכויות.
-        </div>
+        ${backTextHTML}
       </div>
       <div style="border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; padding: 12px 10px; width: 85%;">
         <div style="font-weight: 700; font-size: 11pt; margin-bottom: 4px;">${title}</div>
@@ -451,14 +464,14 @@ function renderSubShaar(container, token, themeId) {
 
     if (selSub !== 'theme_default') {
         if (EXTERNAL_SHAAR_ASSETS.sub[selSub]) {
-            bgHTML = EXTERNAL_SHAAR_ASSETS.sub[selSub];
+            bgHTML = wrapSvgAsShaarBg(EXTERNAL_SHAAR_ASSETS.sub[selSub]);
         } else if (BUILTIN_SHAAR_THEMES[selSub]) {
-            bgHTML = BUILTIN_SHAAR_THEMES[selSub].subHTML;
+            bgHTML = wrapSvgAsShaarBg(BUILTIN_SHAAR_THEMES[selSub].subHTML);
         }
     } else if (customTheme && customTheme.subShaar && customTheme.subShaar.svgData) {
         bgHTML = `<img class="custom-bg-img" src="${customTheme.subShaar.svgData}" alt="שער משנה">`;
     } else if (BUILTIN_SHAAR_THEMES[themeId]) {
-        bgHTML = BUILTIN_SHAAR_THEMES[themeId].subHTML;
+        bgHTML = wrapSvgAsShaarBg(BUILTIN_SHAAR_THEMES[themeId].subHTML);
     } else {
         bgHTML = `<div class="sub-shaar-bg-right"></div>`;
     }
@@ -468,23 +481,20 @@ function renderSubShaar(container, token, themeId) {
     const uRight = document.getElementById('builder-sub-right')?.value;
     const uLeft = document.getElementById('builder-sub-left')?.value;
 
-    const shaarBoxId = selSub !== 'theme_default' ? selSub : ('theme_default:' + themeId);
-
-    boxStyle = resolveShaarBoxStyle('sub', shaarBoxId, uTop, uBottom, uRight, uLeft, { top: 20, bottom: 20, right: 95, left: 15 });
-    if (!boxStyle) {
-        if (customTheme && customTheme.subShaar) {
-            const m = customTheme.subShaar;
-            boxStyle = `position:absolute; top:${m.top}mm; bottom:${m.bottom}mm; right:${m.right}mm; left:${m.left}mm;`;
-        } else if (BUILTIN_SHAAR_THEMES[themeId]) {
-            boxStyle = BUILTIN_SHAAR_THEMES[themeId].subStyle;
-        } else {
-            boxStyle = `position:absolute; top:20mm; bottom:20mm; right:95mm; left:15mm;`;
-        }
+    if (uTop || uBottom || uRight || uLeft) {
+        boxStyle = `position:absolute; top:${uTop || 20}mm; bottom:${uBottom || 20}mm; right:${uRight || 95}mm; left:${uLeft || 15}mm;`;
+    } else if (customTheme && customTheme.subShaar) {
+        const m = customTheme.subShaar;
+        boxStyle = `position:absolute; top:${m.top}mm; bottom:${m.bottom}mm; right:${m.right}mm; left:${m.left}mm;`;
+    } else if (BUILTIN_SHAAR_THEMES[themeId]) {
+        boxStyle = BUILTIN_SHAAR_THEMES[themeId].subStyle;
+    } else {
+        boxStyle = `position:absolute; top:20mm; bottom:20mm; right:95mm; left:15mm;`;
     }
 
     page.innerHTML = `
     ${bgHTML}
-    <div class="theme-bounded-content" data-shaar-type="sub" data-shaar-id="${shaarBoxId}" style="${boxStyle} justify-content:center;">
+    <div class="theme-bounded-content" data-shaar-type="sub" style="${boxStyle} justify-content:center;">
       ${getShaarBoxEditorHTML('sub')}
       <div class="sefer-label"></div>
       <div class="book-title-main" style="font-size: 36pt;">${titleMain}</div>
@@ -529,9 +539,6 @@ function applyContentBg(pageEl, roleKey) {
     if (css) pageEl.style.cssText += css;
 }
 
-/* ==========================================================================
-   רישום דינמי עבור קובצי JSON חיצוניים
-   ========================================================================== */
 function registerExternalShaar(typeKey, id, name, svgContent) {
     registerExternalShaarAsset(typeKey, id, name, svgContent);
     if (!BUILTIN_SHAAR_THEMES[id]) {
